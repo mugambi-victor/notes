@@ -1,0 +1,877 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Django Python</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="be23b93a-5549-42cc-ad8e-4d1e6656086c" class="page sans"><header><h1 class="page-title">Django Python</h1><p class="page-description"></p></header><div class="page-body"><p id="97ac4b20-f79f-460b-9b2a-a0dd04e37114" class="">what is django: Django is a high-level, open source framework for developing web applications using python programming languange. Follows MVC architecture.(just like laravel). </p><p id="2b215a45-f713-49be-856a-8d167ecfa45a" class="">Django encourage use of reusable code.<br/><br/><strong>Model: </strong>Represents the data structure and defines how data is stored in a database. Django provides an Object-Relational Mapping (ORM) system that allows you to define your models using Python classes, and it automatically maps them to database tables.</p><p id="8ec93c4a-a8b3-43c2-9922-8afa0775a2d7" class=""><strong>View: </strong>Handles the presentation logic and interacts with the data through the model. It processes user requests, retrieves data from the model, and passes it to the templates for rendering.</p><p id="3acce45a-11de-4159-a7ac-72409dad389e" class=""><strong>Template: </strong>Defines how the data is presented to the user. Django templates use a syntax that allows you to embed Python-like code for dynamic content rendering. Templates separate the HTML code from the application logic.</p><p id="8a048d8f-ae7d-4082-bbec-93522130b920" class=""><strong>Controller: (in Django, it&#x27;s the URL dispatcher):</strong> Handles the routing of incoming requests to the appropriate view. The URL dispatcher maps URLs to view functions, determining which view should handle a specific request.</p><p id="84f947f0-bd7f-4d0c-9974-0ac4b82b9a3f" class="">Setting up a django project in wsl linux subsystem.</p><ol type="1" id="9a232358-2441-4eff-83af-3e79d6504a73" class="numbered-list" start="1"><li>install python3 </li></ol><ol type="1" id="1a643c98-2cf8-4fb9-8fc9-33358dd5b16b" class="numbered-list" start="2"><li>install pip</li></ol><pre id="91b38d33-92f0-4ac8-8148-2a30aeaca41d" class="code"><span><code>sudo apt update
+sudo apt upgrade
+sudo apt install python3 python3-pip
+</code></span></pre><ol type="1" id="762ba405-f55c-4382-8c2d-a21afeccacca" class="numbered-list" start="3"><li>install Django</li></ol><pre id="fe00b867-774b-4881-a575-a23ccdf732ac" class="code"><span><code>pip3 install Django</code></span></pre><ol type="1" id="44398088-62e3-49b5-b3a7-c564e8ee5449" class="numbered-list" start="4"><li>check django version to confirm installation</li></ol><pre id="c3e0522a-ed09-466b-ab4a-a055e9463a84" class="code"><span><code>python -m django --version</code></span></pre><ol type="1" id="cb7a3ba6-3ff4-46d6-877d-7fc72da09fad" class="numbered-list" start="5"><li>Create your first django project: we call it mysite</li></ol><pre id="1d5c86d8-f027-43c5-a01a-8be507162bc1" class="code"><span><code>django-admin startproject mysite</code></span></pre><p id="8bdb9a78-bb8a-4081-afa3-b433a8e27d10" class="">after starting a django project, eg <strong>mysite, </strong>python creates a mysite project and inside it creates another dir with the name <strong>mysite. </strong>The outer directory is the project folder and it can be renamed to anything unlike the inner directory which is a package for your project. Its name is the Python package name you’ll need to use to import anything inside it (e.g. <code><strong>mysite.urls</strong></code>).</p><ol type="1" id="515619d6-216c-47eb-8d9c-21727b257fb8" class="numbered-list" start="6"><li>Navigate into the project directory i.e the outer mysite<ul id="701fbd89-3613-4512-a6ef-c7efff054c35" class="bulleted-list"><li style="list-style-type:disc"><strong>Manage.py: </strong>a command-line utility that lets you interact with the django project in many ways.</li></ul><ul id="1e8c0b6c-46de-4060-8f2f-d2414aa444f1" class="bulleted-list"><li style="list-style-type:disc">usage:</li></ul><pre id="f84a475d-97fd-4fe9-a7fd-3c793e043f5a" class="code"><span><code>manage.py &lt;command&gt; [options]</code></span></pre><ul id="36b98e75-4fce-47c3-a450-ba70dce09342" class="bulleted-list"><li style="list-style-type:disc"><strong>mysite/__init__.py: </strong>An empty file that tells Python that this directory should be considered a Python package.</li></ul><ul id="7f22b7ea-d2ea-4126-9c41-346d23e66bf4" class="bulleted-list"><li style="list-style-type:disc"><strong>mysite/settings.py: </strong>Settings/configuration for this Django project.</li></ul><ul id="b70ef625-04f6-4418-9065-138aab67693c" class="bulleted-list"><li style="list-style-type:disc"><code><strong>mysite/urls.py</strong></code>: The URL declarations for this Django project; a “table of contents” of your Django-powered site.</li></ul><ul id="859476f0-1adc-4914-82ef-66c2cfc480d9" class="bulleted-list"><li style="list-style-type:disc"><code><strong>mysite/asgi.py</strong></code>: An entry-point for ASGI-compatible web servers to serve your project.</li></ul><ul id="11d661c9-2e89-4293-9cc6-350ad55df2d4" class="bulleted-list"><li style="list-style-type:disc"><code><strong>mysite/wsgi.py</strong></code>: An entry-point for WSGI-compatible web servers to serve your project.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1961a8ab-4597-4f83-8866-38218c360f13"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Project vs App: </strong>A project may contain many apps. </div></figure><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">Creating a polls app inside the mysite project</summary><div class="indented"><p id="3baba313-df38-42f9-94b4-f26812791cde" class="">Make sure you are in the outer project directory that has manage.py.</p><p id="4b4e7aa4-4c30-49cc-9070-b74c64038195" class="">in the terminal run:</p><p id="d6f8cb8a-b243-41f3-bde1-3be05470a596" class=""><code>python manage.py startapp polls</code></p><p id="abd386d1-0a43-45e9-836f-1b4e83b8edd9" class="">That will create a directory <strong>polls </strong>which has all needed files to start our development.</p><pre id="aa42687b-b1b9-4477-bba9-1d3d00758ebe" class="code"><span><code>.
+├── __init__.py
+├── __pycache__
+│   ├── __init__.cpython-310.pyc
+│   ├── urls.cpython-310.pyc
+│   └── views.cpython-310.pyc
+├── admin.py
+├── apps.py
+├── migrations
+│   └── __init__.py
+├── models.py
+├── tests.py
+├── urls.py
+└── views.py</code></span></pre><p id="bf61d603-9de4-4a18-849b-b390e78db76c" class="">After creating your app, lets create a simple view that is returned when the webapp is visited. </p><ul id="d4cb0f71-24b0-47c1-9007-aa8ef9888836" class="bulleted-list"><li style="list-style-type:disc"><strong>The view</strong></li></ul><pre id="45ad1bc9-3e1a-4406-9ab7-5aadc6a0bda5" class="code"><span><code>from django.http import HttpResponse
+from django.shortcuts import render
+
+
+# Create your views here.
+def index(request):
+    return HttpResponse(&quot;Hello, world. You&#x27;re at the polls index.&quot;)</code></span></pre><ul id="a1084af0-a42b-4b8e-8713-9cf2209789ef" class="bulleted-list"><li style="list-style-type:disc">we need to write a view, map a url use(URLconf) that when entered shows the view.</li></ul><ul id="ced03cd7-e552-47c8-9d15-f657f0cc4f18" class="bulleted-list"><li style="list-style-type:disc">To create urls configurations, we need to create a urls file in our app directory. so inside polls, <strong>create a </strong><a href="http://urls.py"><strong>urls.py</strong></a><strong> file.</strong></li></ul><pre id="164419c1-f664-4d35-938e-945d9fa5063a" class="code"><span><code>from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path(&quot;&quot;, views.index, name=&quot;index&quot;),
+]</code></span></pre><p id="8108648f-1bad-4a27-91a8-1cea7a234d21" class="">Next we need to include this path in our project’s url file i.e <strong>mysite/urls.py </strong>we add an import for <code><strong>django.urls.include</strong></code> and insert an <a href="https://docs.djangoproject.com/en/5.0/ref/urls/#django.urls.include"><code><strong>include()</strong></code></a> in the <code><strong>urlpatterns</strong></code> list, so you have:</p><pre id="d33fd91b-5437-4b80-a8e4-466e4e984f29" class="code"><span><code>from django.contrib import admin
+from django.urls import include, path
+
+urlpatterns = [
+    path(&quot;polls/&quot;, include(&quot;polls.urls&quot;)),
+    path(&quot;admin/&quot;, admin.site.urls),
+]</code></span></pre><p id="d0124878-2d0b-4b6b-b3ae-879502a2bdce" class="">The idea behind <a href="https://docs.djangoproject.com/en/5.0/ref/urls/#django.urls.include"><code><strong>include()</strong></code></a> is to make it easy to plug-and-play URLs. Since polls are in their own URLconf (<code><strong>polls/urls.py</strong></code>), they can be placed under “/polls/”, or under “/fun_polls/”, or under “/content/polls/”, or any other path root, and the app will still work.You should always use <code><strong>include()</strong></code> when you include other URL patterns. <code><strong>admin.site.urls</strong></code> is the only exception to this.</p><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0"><strong>The path() function:</strong></summary><div class="indented"><ul id="79c72a72-47cf-4b3c-ab62-97f3a159e797" class="bulleted-list"><li style="list-style-type:disc">Passed 4 arguments, two are mandatory i.e route and view. the other optional ones are Kwargs and name.<strong> </strong></li></ul><ul id="4c71af69-9d48-47c7-b70a-ee0f9e443280" class="bulleted-list"><li style="list-style-type:disc"><strong>route: </strong>This is a string that contains a URL pattern. when processing a request, Django starts at the first pattern in <strong>urlpatterns </strong>and makes its way down the list, comparing the requested URL against each pattern until it finds one that matches.</li></ul><ul id="afb3ac60-8b15-48bd-912a-b4974db63bb6" class="bulleted-list"><li style="list-style-type:disc"><strong>View: </strong>When django finds a matching pattern, it calls the specified view function wirh an <strong>Http Request</strong> object as the first argument and any “captured” values from the route as keyword arguments.</li></ul><ul id="87c7cbd0-ad56-46bf-b5a4-be8003a883e6" class="bulleted-list"><li style="list-style-type:disc"><strong>Kwargs: </strong>Arbitrary keyword arguments can be passed in a dictionary to the target view.</li></ul><ul id="58615726-4b49-4c13-8bf2-e490c7999c83" class="bulleted-list"><li style="list-style-type:disc"><strong>Name: </strong>Naming your URL lets ypu refer to it unambiguously from elsewhere in Django, especially from within templates. </li></ul><p id="7eddc4f1-640e-4950-858b-035b22f76456" class=""> </p></div></details></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">Part two(MODELS and DB)</summary><div class="indented"><p id="4042d220-d91b-4aac-a2c4-72133ea7bcdd" class="">To continue using our app, we need to run: <code>python manage.py migrate</code> so that we create some needed tables for our project in the db.</p><p id="0674c4d3-c1ba-4587-8492-285b19b20fca" class="">The <a href="https://docs.djangoproject.com/en/5.0/ref/django-admin/#django-admin-migrate"><code><strong>migrate</strong></code></a> command will only run migrations for apps in <a href="https://docs.djangoproject.com/en/5.0/ref/settings/#std-setting-INSTALLED_APPS"><code><strong>INSTALLED_APPS</strong></code></a>.</p><ol type="1" id="e9959e57-4d3b-4166-8840-b5caec46fd86" class="numbered-list" start="1"><li><strong>Creating Models</strong></li></ol><p id="71a09b7d-ca3c-43fe-82d7-a6fb225dba7f" class="">Models: Database layout with additional metadata.A model is the single, definitive source of information about your data. It contains the essential fields and behaviors of the data you’re storing. Django follows the <a href="https://docs.djangoproject.com/en/5.0/misc/design-philosophies/#dry">DRY Principle</a>(Dont repeat yourself). The goal is to define your data model in one place and automatically derive things from it.</p><p id="1c468dbc-287b-4eec-ae6e-48e7b07390a3" class="">Migrations are entirely derived from your models file, and are essentially a history that Django can roll through to update your database schema to match your current models.</p><p id="59a46c25-474d-4114-a9b8-96eac1ad6b8d" class="">For our poll app, we’ll create two models: <strong>question </strong>and <strong>Choice </strong>models.</p><p id="0396cde6-044e-4fd6-b3d9-b94b6920044e" class="">A choice has two fields, the text choice and a vote tally.</p><p id="af6a27cd-3b6c-45bc-bab8-a9886e8cfbaf" class="">Each <strong>choice </strong>is associated with a question.</p><p id="bb1b21c9-c1b0-415a-be25-946d96dc81fc" class="">Edit <strong>polls/models.py</strong></p><pre id="bb67e008-7533-4d5b-90cd-9f09a1ebcf5b" class="code"><span><code>from django.db import models
+
+
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
+    pub_date = models.DateTimeField(&quot;date published&quot;)
+
+
+class Choice(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)</code></span></pre><ul id="279b2e9f-8796-465f-af2d-855e7f4cc5d0" class="bulleted-list"><li style="list-style-type:disc">In django, models are represented by python classes. Each model has a number of class varibales,each of which represent a databse field in the model.</li></ul><ul id="b3c413df-ed00-44af-bfa6-9da348a0ed76" class="bulleted-list"><li style="list-style-type:disc">The name of each <a href="https://docs.djangoproject.com/en/5.0/ref/models/fields/#django.db.models.Field"><code><strong>Field</strong></code></a> instance (e.g. <code><strong>question_text</strong></code> or <code><strong>pub_date</strong></code>) is the field’s name, in machine-friendly format. You’ll use this value in your Python code, and your database will use it as the column name.</li></ul><ul id="28763b06-08dc-49be-9794-2e66d8ceda35" class="bulleted-list"><li style="list-style-type:disc">Now we need to include the polls app in our <strong>INSTALLED_APPS </strong>array in <strong>mysite/settings.py </strong>in order for the models to be active and migrations can detect the chnages from polls app. remember we said that migrations check only for the chnages in the apps included in <strong>INSTALLED APPS.</strong></li></ul><ul id="67aa7bda-a24c-46d0-b25d-6fd7403d73ee" class="bulleted-list"><li style="list-style-type:disc">To include the app in our project, we need to add a reference to its configuration class in the <a href="https://docs.djangoproject.com/en/5.0/ref/settings/#std-setting-INSTALLED_APPS"><code><strong>INSTALLED_APPS</strong></code></a> setting. The <code><strong>PollsConfig</strong></code> class is in the <code><strong>polls/apps.py</strong></code> file, so its dotted path is <code><strong>&#x27;polls.apps.PollsConfig&#x27;</strong></code>. this is the path we need to add in <strong>Mysite/settings.py</strong></li></ul><pre id="c93541e4-3391-40e8-9d80-e3b3adfcbac4" class="code"><span><code>INSTALLED_APPS = [
+    &quot;polls.apps.PollsConfig&quot;,
+    &quot;django.contrib.admin&quot;,
+    &quot;django.contrib.auth&quot;,
+    &quot;django.contrib.contenttypes&quot;,
+    &quot;django.contrib.sessions&quot;,
+    &quot;django.contrib.messages&quot;,
+    &quot;django.contrib.staticfiles&quot;,
+]</code></span></pre><ul id="5c0c9ebb-41b8-48d1-86c5-f5b5d49d0fd4" class="bulleted-list"><li style="list-style-type:disc">Now we need to create a migrations file for our model:</li></ul><ul id="a2332feb-42c5-4266-9af1-acb9f42df834" class="bulleted-list"><li style="list-style-type:disc"><code>python manage.py makemigrations polls</code></li></ul><ul id="acfad9a6-5dc6-4b9a-839f-b6984943edb4" class="bulleted-list"><li style="list-style-type:disc">By running <code><strong>makemigrations</strong></code>, you’re telling Django that you’ve made some changes to your models (in this case, you’ve made new ones) and that you’d like the changes to be stored as a <em>migration</em>.</li></ul><ul id="c0636c72-235d-4599-84c5-f976e1115218" class="bulleted-list"><li style="list-style-type:disc">Migrations are how Django stores changes to your models (and thus your database schema) - they’re files on disk. You can read the migration for your new model if you like; it’s the file <code><strong>polls/migrations/0001_initial.py</strong></code>.</li></ul><ul id="f9eeb737-a9fa-4cfb-8e40-d86edb98fa21" class="bulleted-list"><li style="list-style-type:disc">There’s a command that will run the migrations for you and manage your database schema automatically - that’s called <a href="https://docs.djangoproject.com/en/5.0/ref/django-admin/#django-admin-migrate"><code><strong>migrate</strong></code></a>, and we’ll come to it in a moment - but first, let’s see what SQL that migration would run. The <a href="https://docs.djangoproject.com/en/5.0/ref/django-admin/#django-admin-sqlmigrate"><code><strong>sqlmigrate</strong></code></a> command takes migration names and returns their SQL: <code>python manage.py sqlmigrate polls 0001</code></li></ul><ul id="4b11ae03-4408-4fa9-b3fa-48ef27c32eb3" class="bulleted-list"><li style="list-style-type:disc">To make the chnages, run : <mark class="highlight-yellow_background"><strong>python3 </strong></mark><mark class="highlight-yellow_background"><strong><a href="http://manage.py">manage.py</a></strong></mark><mark class="highlight-yellow_background"><strong> migrate.</strong></mark></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">Playing around with the API</summary><div class="indented"><ul id="7d80c352-b467-4c0f-8d35-6faeef3bd331" class="bulleted-list"><li style="list-style-type:disc">Django provides us with an interactive shell API that we can interact with our app and models. To invoke the Python Shell, <br/><br/><code>python manage.py shell</code></li></ul><ul id="96093ec8-8a18-4264-8acb-515e23fa4061" class="bulleted-list"><li style="list-style-type:disc">We’re using this instead of simply typing “python”, because <code><strong>manage.py</strong></code> sets the <a href="https://docs.djangoproject.com/en/5.0/topics/settings/#envvar-DJANGO_SETTINGS_MODULE"><code><strong>DJANGO_SETTINGS_MODULE</strong></code></a> environment variable, which gives Django the Python import path to your <code><strong>mysite/settings.py</strong></code> file.</li></ul><ul id="1a58a788-ee78-43bc-9cb7-b6741908154f" class="bulleted-list"><li style="list-style-type:disc"><strong>The database ApI: </strong> once you have created your models, django provides an API that lets you do CRUD operations to these objects. </li></ul><ul id="ac116c97-3100-4356-9105-b23d5d0dcde9" class="bulleted-list"><li style="list-style-type:disc">We begin using the API by importing our models.</li></ul><pre id="2ee63a8b-8287-446f-baf1-25979f30315f" class="code"><span><code>&gt;&gt;&gt; from polls.models import Choice, Question  # Import the model classes we just wrote.
+
+# No questions are in the system yet.</code></span></pre><ul id="03a3fcec-7d4a-44e2-b3cf-2d1e3193f700" class="bulleted-list"><li style="list-style-type:disc">We can choose to display all question and even save our first question objects by:</li></ul><pre id="dd7cb915-7f89-40aa-b091-fc52803ecf30" class="code"><span><code>&gt;&gt;&gt; Question.objects.all()
+&lt;QuerySet []&gt;
+
+# Create a new Question.
+# Support for time zones is enabled in the default settings file, so
+# Django expects a datetime with tzinfo for pub_date. Use timezone.now()
+# instead of datetime.datetime.now() and it will do the right thing.
+&gt;&gt;&gt; from django.utils import timezone
+&gt;&gt;&gt; q = Question(question_text=&quot;What&#x27;s new?&quot;, pub_date=timezone.now())
+
+# Save the object into the database. You have to call save() explicitly.
+&gt;&gt;&gt; q.save()</code></span></pre><ul id="4292ccb9-c267-4c39-a3f6-219a7ae24613" class="bulleted-list"><li style="list-style-type:disc">We can access the id, name and date of the question q we created by:</li></ul><pre id="070de100-f740-44c8-937c-ad6d342ad40b" class="code"><span><code>&gt;&gt;&gt; q.id
+1
+# Access model field values via Python attributes.
+&gt;&gt;&gt; q.question_text
+&quot;What&#x27;s new?&quot;
+&gt;&gt;&gt; q.pub_date
+datetime.datetime(2012, 2, 26, 13, 0, 0, 775217, tzinfo=datetime.timezone.utc)</code></span></pre><ul id="acdd6bab-5c7b-4d93-9859-b697e2bb5439" class="bulleted-list"><li style="list-style-type:disc">Displaying all objects</li></ul><pre id="ae5d99d5-7474-4887-bd28-8d78e80a0f07" class="code"><span><code># objects.all() displays all the questions in the database.
+&gt;&gt;&gt; Question.objects.all()
+&lt;QuerySet [&lt;Question: Question object (1)&gt;]&gt;</code></span></pre><p id="1291a222-6bc3-4283-a517-193eb8150301" class="">This format is not very readable, we can fix this by updating our models and adding a <strong>str</strong>() method for both question and choice.</p><p id="8f579abc-ee47-4464-9e12-11128db5c178" class="">in our <strong>polls/models.py</strong></p><pre id="f20a3f0d-6891-4153-939f-884753fab1cc" class="code"><span><code>from django.db import models
+
+
+class Question(models.Model):
+    # ...
+    def __str__(self):
+        return self.question_text
+
+
+class Choice(models.Model):
+    # ...
+    def __str__(self):
+        return self.choice_text</code></span></pre><ul id="f7ee8407-88fd-404b-8aa2-c03c3851cba4" class="bulleted-list"><li style="list-style-type:disc">It’s important to add <a href="https://docs.djangoproject.com/en/5.0/ref/models/instances/#django.db.models.Model.__str__"><code><strong>__str__()</strong></code></a> methods to your models, not only for your own convenience when dealing with the interactive prompt, but also because objects’ representations are used throughout Django’s automatically-generated admin.</li></ul><ul id="3aee6bd1-086a-43d2-b0ec-3215daac2fd3" class="bulleted-list"><li style="list-style-type:disc">Selecting a Question with a specific id:</li></ul><pre id="c6f91473-5798-4048-afa5-c820bc28632a" class="code"><span><code>python3 manage.py shell
+Python 3.10.12 (main, Nov 20 2023, 15:14:05) [GCC 11.4.0] on linux
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+(InteractiveConsole)
+&gt;&gt;&gt; from polls.models import Question
+&gt;&gt;&gt; Question.objects.get(id=1)
+&lt;Question: What&#x27;s up?&gt;
+&gt;&gt;&gt;</code></span></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">INTRODUCTION TO DJANGO ADMIN</summary><div class="indented"><ul id="bb209b5a-966c-44b9-b5a8-2d1e1ffe09c3" class="bulleted-list"><li style="list-style-type:disc">Generating admin sites for ypur stuff or clients to add, change and delete content is tedious work and does not require much creativity, so django entirely automates this action. </li></ul><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Creating an admin user</summary><div class="indented"><p id="9516d895-2bef-4efc-a224-36bffae02816" class="">run:</p><pre id="fe920b86-dc9b-4f49-8046-fa65195d19c1" class="code"><span><code>python manage.py createsuperuser</code></span></pre><ul id="05e6a855-2c1f-4169-8453-bded294655c1" class="bulleted-list"><li style="list-style-type:disc">Enter admin site now with details created.</li></ul><p id="221a74c5-166b-4b0e-9a28-59a8b9fde672" class=""><strong><strong>Make the poll app modifiable in the admin</strong></strong></p><ul id="75e059bc-7795-47a1-a518-ae511a42e257" class="bulleted-list"><li style="list-style-type:disc">We need to tell the admin that <strong>question </strong>objects have an admin interface. To do this, open the <strong>polls/admin.py </strong>file and edit it:</li></ul><pre id="8c4d4457-2ee0-4e1a-aee8-3395dee2962c" class="code"><span><code>from django.contrib import admin
+
+from .models import Question
+
+admin.site.register(Question)</code></span></pre><ul id="3b07965b-eed4-4b05-8ba4-8947c916d6cb" class="bulleted-list"><li style="list-style-type:disc">With this, go back to the admin module, you will find that the admin has the capability of adding Questions now.</li></ul><p id="592c90b1-75f7-45a6-8576-36fc2a66fe16" class="">Things to note here:</p><ul id="aa946f03-6885-4850-8745-ae776fefcd39" class="bulleted-list"><li style="list-style-type:disc">The question form is automatically generated from the <code><strong>Question</strong></code> model.</li></ul><ul id="2e3e047a-6e60-4bc8-94a7-b971f801d5d7" class="bulleted-list"><li style="list-style-type:disc">The different model field types (<a href="https://docs.djangoproject.com/en/5.0/ref/models/fields/#django.db.models.DateTimeField"><code><strong>DateTimeField</strong></code></a>, <a href="https://docs.djangoproject.com/en/5.0/ref/models/fields/#django.db.models.CharField"><code><strong>CharField</strong></code></a>) correspond to the appropriate HTML input widget. Each type of field knows how to display itself in the Django admin.</li></ul><ul id="66a22ad6-13dd-4e69-bb0a-af206e60c001" class="bulleted-list"><li style="list-style-type:disc">Each <a href="https://docs.djangoproject.com/en/5.0/ref/models/fields/#django.db.models.DateTimeField"><code><strong>DateTimeField</strong></code></a> gets free JavaScript shortcuts. Dates get a “Today” shortcut and calendar popup, and times get a “Now” shortcut and a convenient popup that lists commonly entered times.</li></ul><p id="b03252c7-847e-4dc1-9a8c-b9c654a6ae63" class="">The bottom part of the page gives you a couple of options:</p><ul id="24c341bf-9050-4863-982f-0a29dc0a66f4" class="bulleted-list"><li style="list-style-type:disc">Save – Saves changes and returns to the change-list page for this type of object.</li></ul><ul id="41c37b05-0b78-4e16-b106-e49eed495ce3" class="bulleted-list"><li style="list-style-type:disc">Save and continue editing – Saves changes and reloads the admin page for this object.</li></ul><ul id="5d375bce-298d-40d1-9111-2bd0632a2a42" class="bulleted-list"><li style="list-style-type:disc">Save and add another – Saves changes and loads a new, blank form for this type of object.</li></ul><ul id="5f4d88cf-cca1-47f2-825b-7fef37ffe154" class="bulleted-list"><li style="list-style-type:disc">Delete – Displays a delete confirmation page</li></ul></div></details></div></details><h1 id="81b5a5da-edbd-4f35-96f5-815c6c42ee45" class="">PART THREE(VIEWS)</h1><ul id="c9a73788-4389-4b64-a028-e914e43ec551" class="bulleted-list"><li style="list-style-type:disc">We have our models, the bext thing is to create an interface where users can interact with the polls app</li></ul><ul id="fd8b2825-1e2a-4f8a-b258-b6b82194fdc8" class="bulleted-list"><li style="list-style-type:disc">A <strong>View </strong>is a “type” of webpage in ypur django application that generally serves a specific function and has a specific template. For example, in blog app, you may have the following views, <strong>blog homepage, comment action etc.</strong></li></ul><ul id="2fa91567-d517-4cf7-bd5a-553e7fafb2d2" class="bulleted-list"><li style="list-style-type:disc">For our polls app, we will have 4 views:</li></ul><ul id="241c90a6-5a13-43d5-a216-778a49a29d95" class="bulleted-list"><li style="list-style-type:disc"><strong>index: </strong>displays the last few questions</li></ul><ul id="7f729c0e-b44f-4cb2-a7dc-b75811b09c7e" class="bulleted-list"><li style="list-style-type:disc"><strong> detail: </strong>displays a question text, with no results but with a form to vote</li></ul><ul id="69d8e5f5-16ec-4faa-8472-7ddea4da6c37" class="bulleted-list"><li style="list-style-type:disc"><strong>results: </strong>displays results for a particular question</li></ul><ul id="afa8aa82-09fe-4cd4-baa9-f68aa0a62e6d" class="bulleted-list"><li style="list-style-type:disc"><strong>vote action: </strong>handles voting for aparticular choice in a particular question.</li></ul><ul id="6c2280a5-550d-4ea2-bb0e-73821f9a5247" class="bulleted-list"><li style="list-style-type:disc">In Django, web pages and other content are delivered by views. Each view is represented by a Python function (or method, in the case of class-based views). Django will choose a view by examining the URL that’s requested (to be precise, the part of the URL after the domain name).</li></ul><ul id="a22c94ce-ce52-4860-956c-f78f8a079faa" class="bulleted-list"><li style="list-style-type:disc">To get from a URL to a view, Django uses what are known as ‘URLconfs’. A URLconf maps URL patterns to views.</li></ul><ul id="15aa0018-caaf-46e4-b7a3-08b70f59da77" class="bulleted-list"><li style="list-style-type:disc"><a href="http://views.py">views.py</a> contains functions that returns requested data to users via html pages or plain python.</li></ul><ul id="b18a233a-eba6-4142-935c-c75eb6e31d24" class="bulleted-list"><li style="list-style-type:disc">the following code is for pure python: </li></ul><p id="870ba865-b7d2-4646-82bc-6394a63c7e62" class="">
+</p><pre id="48f1fc67-8738-432b-a0ec-d21c0cfbacdc" class="code"><span><code>#views.py
+def detail(request, question_id):
+    return HttpResponse(&quot;You&#x27;re looking at question %s.&quot; % question_id)
+
+
+def results(request, question_id):
+    response = &quot;You&#x27;re looking at the results of question %s.&quot;
+    return HttpResponse(response % question_id)
+
+
+def vote(request, question_id):
+    return HttpResponse(&quot;You&#x27;re voting on question %s.&quot; % question_id)</code></span></pre><ul id="4aea502d-2168-4659-a823-fba659ea318b" class="bulleted-list"><li style="list-style-type:disc">Returning html pages</li></ul><pre id="d5791894-470a-49e6-ac2a-dc18d815d1d8" class="code"><span><code>#views.py returning a template
+from django.shortcuts import render
+
+from .models import Question
+
+
+def index(request):
+    latest_question_list = Question.objects.order_by(&quot;-pub_date&quot;)[:5]
+    context = {&quot;latest_question_list&quot;: latest_question_list}
+    return render(request, &quot;polls/index.html&quot;, context)</code></span></pre><pre id="2f9598d7-718f-4d90-ade5-c2253af8d4dd" class="code"><span><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    {% if latest_question_list %}
+    &lt;ul&gt;
+    {% for question in latest_question_list %}
+        &lt;li&gt;&lt;a href=&quot;/polls/{{ question.id }}/&quot;&gt;{{ question.question_text }}&lt;/a&gt;&lt;/li&gt;
+    {% endfor %}
+    &lt;/ul&gt;
+{% else %}
+    &lt;p&gt;No polls are available.&lt;/p&gt;
+{% endif %}
+&lt;/body&gt;
+&lt;/html&gt;</code></span></pre><ul id="1df30f26-c8fe-4858-9e85-f994a3bf7d17" class="bulleted-list"><li style="list-style-type:disc">To add the urls of the new views, edit <strong>polls/urls.py</strong></li></ul><ul id="079e752c-86d2-47d0-b58c-7982dcbeda78" class="bulleted-list"><li style="list-style-type:disc">We also need to update our urls to accommodate the new views</li></ul><pre id="8a7b8def-f712-423f-a079-1156e776e11c" class="code"><span><code>from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    # ex: /polls/
+    path(&quot;&quot;, views.index, name=&quot;index&quot;),
+    # ex: /polls/5/
+    path(&quot;&lt;int:question_id&gt;/&quot;, views.detail, name=&quot;detail&quot;),
+    # ex: /polls/5/results/
+    path(&quot;&lt;int:question_id&gt;/results/&quot;, views.results, name=&quot;results&quot;),
+    # ex: /polls/5/vote/
+    path(&quot;&lt;int:question_id&gt;/vote/&quot;, views.vote, name=&quot;vote&quot;),
+]</code></span></pre><p id="b4a0910b-9be6-4d39-91ee-f3f7bd78b389" class="">
+</p><p id="abe2393f-8dd3-4d53-8765-847f99c24bc9" class=""><strong>The render method:</strong></p><p id="1cfb27ad-6187-4d51-ab2d-1804d58d88ec" class="">The <a href="https://docs.djangoproject.com/en/5.0/topics/http/shortcuts/#django.shortcuts.render"><code><strong>render()</strong></code></a> function takes the request object as its first argument, a template name as its second argument and a dictionary as its optional third argument. It returns an <a href="https://docs.djangoproject.com/en/5.0/ref/request-response/#django.http.HttpResponse"><code><strong>HttpResponse</strong></code></a> object of the given template rendered with the given context.</p><pre id="07d2a62c-8040-4fcc-9472-384ccafc1b94" class="code"><span><code>from django.shortcuts import render
+
+from .models import Question
+
+
+def index(request):
+    latest_question_list = Question.objects.order_by(&quot;-pub_date&quot;)[:5]
+    context = {&quot;latest_question_list&quot;: latest_question_list}
+    return render(request, &quot;polls/index.html&quot;, context)</code></span></pre><p id="2efc3510-bfe7-43fd-8ed2-3d401b910a23" class="">
+</p><p id="8ff51a10-811d-4f7c-84ef-aa6bbe17a760" class=""><strong>Raising a 404 error</strong></p><p id="1df1cf26-ed83-46ee-9619-3c362129482f" class="">lets tackle the detail view: the page that displays a question text for a given poll.</p><p id="3a89d96f-001d-4c17-8ef2-41add4e6fcfc" class="">Each view does one of two things: returning a <strong>httpResponse </strong>object containing the content of requested page, or raising an exception such as <strong>http404.</strong></p><pre id="9990c219-7b21-4359-a00c-8d017d7821d5" class="code"><span><code>from django.http import Http404
+from django.shortcuts import render
+
+from .models import Question
+
+
+# ...
+def detail(request, question_id):
+    try:
+        question = Question.objects.get(pk=question_id)
+    except Question.DoesNotExist:
+        raise Http404(&quot;Question does not exist&quot;)
+    return render(request, &quot;polls/detail.html&quot;, {&quot;question&quot;: question})</code></span></pre><p id="7cee1665-f003-4e06-b3eb-5e2857b66bd7" class=""><strong>The get_object_or_404() function </strong>takes a django odle as its first arguments and an arbitrary number of keyword arguments, which it passes to the<strong> get() </strong>function of the model’s manager. It raises a <strong>Http404 </strong>if the object doesnt exit.</p><blockquote id="318d9357-1c60-4e8c-8db8-92c5b74e5d3e" class=""><strong>Philosophy</strong><p id="026973b9-6585-44bd-a8f9-12762c13bf4f" class="">Why do we use a helper function <a href="https://docs.djangoproject.com/en/5.0/topics/http/shortcuts/#django.shortcuts.get_object_or_404"><code><strong>get_object_or_404()</strong></code></a> instead of automatically catching the <a href="https://docs.djangoproject.com/en/5.0/ref/exceptions/#django.core.exceptions.ObjectDoesNotExist"><code><strong>ObjectDoesNotExist</strong></code></a> exceptions at a higher level, or having the model API raise <a href="https://docs.djangoproject.com/en/5.0/topics/http/views/#django.http.Http404"><code><strong>Http404</strong></code></a> instead of <a href="https://docs.djangoproject.com/en/5.0/ref/exceptions/#django.core.exceptions.ObjectDoesNotExist"><code><strong>ObjectDoesNotExist</strong></code></a>?</p><p id="a4fd5693-b9f8-45e1-a8bc-4ecd6ed447af" class="">Because that would couple the model layer to the view layer. One of the foremost design goals of Django is to maintain loose coupling. Some controlled coupling is introduced in the <a href="https://docs.djangoproject.com/en/5.0/topics/http/shortcuts/#module-django.shortcuts"><code><strong>django.shortcuts</strong></code></a> module.</p></blockquote><p id="25e6c49e-cb3a-4ce9-8f75-2306db1f20f2" class="">We can use this shorter method of returning a <strong>404 </strong> by:</p><pre id="baafe3c9-0966-4811-9b03-38188462e4c7" class="code"><span><code>def detail(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    return render(request, &quot;polls/detail.html&quot;, {&quot;question&quot;: question})</code></span></pre><p id="6244add3-9d86-4c09-a085-6e2838d6130c" class=""><strong>Templating</strong></p><p id="0e43a33d-9ebd-4d64-8ae7-3db67fd164a5" class="">Html pages are called templates in django. These files are created inside your apps directory, <strong>templates/appname/template_name. eg polls/templates/polls/index.html. <br/><br/></strong>Our detail.html view would look like this:</p><pre id="15c5f7bb-8978-44d3-b45f-3ef7bcf53fbe" class="code"><span><code>&lt;h1&gt;{{ question.question_text }}&lt;/h1&gt;
+&lt;ul&gt;
+{% for choice in question.choice_set.all %}
+    &lt;li&gt;{{ choice.choice_text }}&lt;/li&gt;
+{% endfor %}
+&lt;/ul&gt;</code></span></pre><p id="bab44551-0cf6-40b5-aa79-628afd0bc4cf" class="">The template system uses <strong>dot-lookup syntax </strong>to access variable attributes. eg <strong>{{ question.question_text }}</strong></p><p id="a9e754ac-a278-46f6-8f43-a45d04d905b0" class=""><strong>Removing hard coded URLs in templates</strong></p><p id="4b452310-6662-4c87-875b-129a4544ce72" class="">the current link for viewing question details in our index.html view is not very friendly.</p><p id="be3fa06c-7dda-4072-a1e0-d087b8fc66d7" class=""><code>&lt;</code><code><strong>li</strong></code><code>&gt;&lt;</code><code><strong>a</strong></code><code> href=&quot;/polls/{{ question.id }}/&quot;&gt;{{ question.question_text }}&lt;/</code><code><strong>a</strong></code><code>&gt;&lt;/</code><code><strong>li</strong></code><code>&gt;</code></p><p id="d5875683-fd9f-45e4-b257-e4341de0796f" class="">
+</p><p id="c3bbc34d-140c-4ee8-a7aa-21d52d948603" class="">we want to replace this with the name attribute we used in our path when defining the url. i.e :</p><pre id="462a5887-5166-473b-a874-5cefecccc05b" class="code"><span><code># the poll/urls has these urls that have a name 
+# attribute that we want to use in our templates
+urlpatterns = [
+    # ex: /polls/
+    path(&quot;&quot;, views.index, name=&quot;index&quot;),
+    # ex: /polls/5/
+    path(&quot;&lt;int:question_id&gt;/&quot;, views.detail, name=&quot;detail&quot;),
+    # ex: /polls/5/results/
+    path(&quot;&lt;int:question_id&gt;/results/&quot;, views.results, name=&quot;results&quot;),
+    # ex: /polls/5/vote/
+    path(&quot;&lt;int:question_id&gt;/vote/&quot;, views.vote, name=&quot;vote&quot;),
+]</code></span></pre><p id="9412aea9-aa01-4d05-9140-e5d84896d7ea" class="">To use the name attribute we can:</p><pre id="4c1f6bbf-16df-4869-8fef-e3c997a960cd" class="code"><span><code>&lt;li&gt;&lt;a href=&quot;{% url &#x27;detail&#x27; question.id %}&quot;&gt;{{ question.question_text }}&lt;/a&gt;&lt;/li&gt;</code></span></pre><p id="26257e51-e1a4-4d2f-806b-d4c58a2b9fbd" class="">
+</p><p id="deecaa57-adb9-4d9b-8b21-1883b70ed6d0" class=""><strong>Namespacing URL names</strong></p><p id="838d5f6d-8b05-483c-b69e-0faf3d79155f" class="">For this tutorial, we only have one app(<strong>polls</strong>) but in real life projects, one can have many apps. The way that DJANGO diffrentiates URL names betwwen them, is by adding namespaces to our URLconf. in the <strong>polls/urls.py </strong>file, go ahead and add an <strong>app_name </strong>to set the application’s namespace.</p><pre id="5b235e8e-4e98-4f3e-b774-f5036b53daa2" class="code"><span><code>from django.urls import path
+
+from . import views
+#the app name
+app_name = &quot;polls&quot;
+urlpatterns = [
+    path(&quot;&quot;, views.index, name=&quot;index&quot;),
+    path(&quot;&lt;int:question_id&gt;/&quot;, views.detail, name=&quot;detail&quot;),
+    path(&quot;&lt;int:question_id&gt;/results/&quot;, views.results, name=&quot;results&quot;),
+    path(&quot;&lt;int:question_id&gt;/vote/&quot;, views.vote, name=&quot;vote&quot;),
+]</code></span></pre><p id="cc7faab0-a82b-4530-9a5e-d45b286defc3" class="">Now change your <strong>polls/index.html </strong>template from:</p><pre id="01b2230d-b6b2-4eb7-95e5-ccd4b63f3b13" class="code"><span><code>&lt;li&gt;&lt;a href=&quot;{% url &#x27;detail&#x27; question.id %}&quot;&gt;{{ question.question_text }}&lt;/a&gt;&lt;/li&gt;</code></span></pre><p id="a7dd85aa-2b04-4fae-9e13-3ac47f5301b5" class="">to point at the namespaced detail view:</p><pre id="11a9b8c2-b2f6-4130-9009-704e2674d10f" class="code"><span><code>&lt;li&gt;&lt;a href=&quot;{% url &#x27;polls:detail&#x27; question.id %}&quot;&gt;{{ question.question_text }}&lt;/a&gt;&lt;/li&gt;</code></span></pre></li></ol></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,685 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>COURSERA UI/UX</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="efe92b6c-613c-4f0d-b67f-f8926888e3f6" class="page sans"><header><h1 class="page-title">COURSERA UI/UX</h1><p class="page-description"></p></header><div class="page-body"><p id="fb7b67c7-010b-4356-a145-fd7b060c8f0b" class="">product development lifecycle</p><ol type="1" id="f3431273-ae37-4d73-bf21-9677ed96c226" class="numbered-list" start="1"><li>Brainstorm- ideas to solve problem and challenges are identified here</li></ol><ol type="1" id="0221320b-7ec5-41f1-937e-10ee0113649b" class="numbered-list" start="2"><li>Define- </li></ol><p id="f27aa5a2-b54d-4433-a035-ebce37e593a5" class="">The goal is to figure out the specifications for the product by answering questions like: Who is the product for? What will the product do? And, what features need to be included for the product to be successful?</p><p id="2515d90b-5a9c-492f-8e6d-1d5161ffa7f6" class="">During the define stage, your team narrows the focus of your idea. One product can’t solve every user problem. Continuing with the example for an app to help working parents and guardians, your idea should focus on helping parents and guardians find reliable childcare <em>or </em>manage their schedules, not both. In this stage, a UX designer might help the team pin down the focus of the idea, but a product lead will probably be the one to define the scope of the project.</p><ol type="1" id="f7b8b368-6c20-4d7b-8e23-a619c1ab1c4e" class="numbered-list" start="1"><li>Design </li></ol><ol type="1" id="7d5cfef1-96ea-480d-8bec-5230601917fe" class="numbered-list" start="2"><li>Testing- done with the end users toget their feedback.</li></ol><ol type="1" id="fa59cbf2-a4a0-4aa8-91dd-49e9259691f5" class="numbered-list" start="3"><li>Launch</li></ol><p id="2930668f-d5d4-42d9-9e37-321ca7dd5827" class="">first two stages are more about planning. create storyboards, wireframes, </p><p id="14335c81-6092-437f-8ce1-6c045e6112a1" class="">Good design should be: <strong>usable, useful, enjoyable and equitable. </strong></p><p id="201fd0d4-ce29-4f6d-aa1e-374873418e55" class=""><strong>usable: </strong>Means the design, structure and purpose of the product is clear and easy to use. Imagine you are evaluating the usability of an airline app. Assuming the primary purpose of this app is to book a flight, the design should provide a clear and easy way to complete that task. For example, a section where you can easily enter travel and flight details on the homepage would be an example of good usability.</p><p id="fb8b7f47-d953-4b5a-83c3-0704bb7e64f9" class=""><strong>Equitable: </strong>Means a design is helpful to people with diverse abilities and backgrounds. Imagine you are evaluating how equitable a social messaging app is. You might consider the design more equitable if the keyboard emoji list includes different skin tones and gender-neutral avatar options.</p><p id="9f95e9b0-708b-40d4-9b6f-757c40d38d92" class=""><strong>Enjoyable: </strong>means the design delights the user. The design reflects what the user may be thinking or feeling and creates a connection with them. A product’s design doesn’t have to be enjoyable for it to function properly.<em>  </em>As you evaluate enjoyability of the product’s UI you can ask questions like:</p><ul id="6e33a6db-6e05-40c3-ac0c-940b2b243f29" class="bulleted-list"><li style="list-style-type:disc">Are there aspects of the desifn rhat consider user’s feelings?</li></ul><ul id="64122fd9-ea31-4576-a71f-1144ea21fe79" class="bulleted-list"><li style="list-style-type:disc">Does the design inspire delight in the user.</li></ul><ul id="dc1108fc-20b0-437c-b657-e1ccd3d7ad70" class="bulleted-list"><li style="list-style-type:disc">Does the design keep the user engaged throughout their experience?</li></ul><p id="0f09f499-ec78-4b00-8bd2-0afd5d3f1d5d" class="">Imagine you are evaluating how enjoyable a video streaming app is. Design aspects that might increase how much you enjoy the product include personalized recommendations based on previous watching habits, or the ability to customize the appearance of your account.</p><p id="0f5480fa-f4ba-49a4-b315-378ab6c6492a" class=""><strong>Useful: </strong>this means a design should be able to solve user’s problems. Imagine you’re evaluating how useful a banking app is. Users typically download these apps because they need a place to manage their money. With this in mind, aspects of the app that might be considered useful are features that can be used to transfer money between accounts and pay bills.<strong><br/>A ux designer ties a specific emotion to the experience of using the product.<br/></strong></p><p id="c956b786-3b2a-4d74-99ee-c794c9f4789b" class="">
+</p><p id="991173e1-1774-40a5-a6dd-b817730254be" class=""><strong>Job responsibilities of entry-level UX designers.</strong></p><ol type="1" id="7c38bfd3-c2e2-4961-9c24-f405a62d6240" class="numbered-list" start="1"><li>Research:  Understand audiences and learn about their backgrounds, demographiocs, motivations, pain points, emotions and life goals.</li></ol><ol type="1" id="4b484283-e4ec-4917-b9e1-f33b5efe175e" class="numbered-list" start="2"><li>Wireframing: An outline or sketch of a product or a screeen. Gives general outline. </li></ol><ol type="1" id="6fb376f0-a8cf-4eba-ae05-d33d9adf64da" class="numbered-list" start="3"><li>Prototyping: crating an early model of a product that demonstrates functionality.  shows product progression from one page to the next. The purpose of wireframes and prototypes is to figure out the best design for a product.</li></ol><ol type="1" id="78e8235b-1863-4e0f-a2c7-eabe8e00292e" class="numbered-list" start="4"><li>Information architecture.</li></ol><p id="533bd57b-d548-468b-a527-38dbe61ca9c0" class=""><strong>specialists, Generalists and T-shaped Designers. </strong></p><ol type="a" id="daf1197d-d03c-4867-8057-b9fc957094c5" class="numbered-list" start="1"><li><strong>Generalists: </strong>A UX designer with an array of responsibilities. from coding to prototyping, Branding, user research, UX writing, Visual design etc.</li></ol><ol type="a" id="adbc4c2f-5c84-42cc-921d-a25996712a7e" class="numbered-list" start="2"><li><strong>Specialist: </strong>Dives into one particular UX design role, like interaction, visual or motion design.</li></ol><ol type="a" id="e03cb5d1-252b-4f32-af1f-0aabd4862740" class="numbered-list" start="3"><li><strong>T-shaped designer: </strong>Specializes in one kind of UX design but  had a breadth of knowledge in other areas. could be coding, Prototyping, visual design UX research and writing.</li></ol><p id="37f75c1d-2a16-4241-a6db-bafa5097c740" class=""><strong>To desing, think: what is the problem? what are the issues going on within this product? why are we looking to improve or introduce this feature?</strong></p><p id="cd0ae83e-215f-46af-840b-bbcc5e422e3a" class="">
+</p><h2 id="6ee7cefc-6962-4506-a275-f5d832aa037a" class=""><strong>Terms and definitions for Course 1, Module 1</strong></h2><p id="d8e7d58b-0665-4b18-8d93-deb88f1f2ff2" class=""><strong>Advertising agencies:</strong> Teams of creatives hired by clients to build marketing campaigns</p><p id="f1fe4842-779e-4658-b2d4-f1905e836347" class=""><strong>Apprenticeships:</strong> Provides on-the-job training to help people develop real skills</p><p id="456df531-4252-4468-a844-5d5c3a95eed0" class=""><strong>Assets:</strong> Everything from the text and images to the design specifications, like font style, color,</p><p id="dd18e399-ec6a-4e8f-a73c-2c4c19fac235" class="">size, and spacing</p><p id="49c9a56a-a925-4eb4-9b69-d0a6f93fb508" class=""><strong>Design Agency:</strong> A one-stop shop for the look of brands, products, and services</p><p id="1f239700-11f8-407c-9ec6-1fef04b97688" class=""><strong>Empathy: </strong>The ability to understand someone else&#x27;s feelings or thoughts in a situation</p><p id="0cdfc22b-b191-400d-b953-be0e5c23b8d0" class=""><strong>Freelancers:</strong> Designers who work for themselves and market their services to businesses to</p><p id="c525703c-4706-4436-bbd0-22dab4b3fa93" class="">find customers</p><p id="19424dbf-9300-4bd8-9a2b-4dbef2978935" class=""><strong>Generalist:</strong> A UX designer with a broad number of responsibilities</p><p id="f1e82008-5783-413d-b0b8-087ddf9c01b1" class=""><strong>Graphic designers:</strong> Create visuals that tell a story or message</p><p id="56b56c2c-24ad-4811-9ef9-defc5a838d7b" class=""><strong>Information architecture: </strong>The framework of a website or how it’s organized, categorized, and</p><p id="4526fcb6-6b7c-4e9f-990d-e390c73c13be" class="">structured</p><p id="6254cf27-088e-4d37-ae14-c75f5689d4f7" class=""><strong>Interaction designers:</strong> Focus on designing the experience of a product and how it functions</p><p id="9bcb2493-b599-4d0b-a7ff-7007722a0f1c" class=""><strong>Internship: </strong>A short term job with limited responsibility</p><p id="a794b947-ffd0-4338-a6bd-063d72d7d6e9" class=""><strong>Motion designers:</strong> Think about what it feels like for a user to move through a product</p><p id="8a31fa3c-5e25-456b-a8fe-c5a64e9012ca" class=""><strong>Product:</strong> A good, service, or feature</p><p id="bff8fd7a-3ed8-4f61-82f9-66f0230948a7" class=""><strong>Production designers:</strong> Make sure first and final designs match in the finished project</p><p id="2322f2ee-a3f5-4697-9cfa-6ee0393e1b59" class="">materials and that the assets are ready to be handed off to engineering team</p><p id="26109278-5c4c-40bd-9734-0bf94350eab8" class=""><strong>Prototype:</strong> An early model of a product that demonstrates functionality</p><p id="06851dd5-ea62-4e2e-a695-af5b1dee5251" class=""><strong>Specialist:</strong> A designer who dives deep into one particular type of user experience, like</p><p id="1c185fe5-77e8-4ab7-bbdb-930f00cc3b9f" class="">interaction design, visual design, or motion design</p><p id="7d5ee6a9-1eab-4ea5-bc49-eb4912a06697" class=""><strong>Startup: </strong>A new business that wants to develop a unique product or service and bring it to</p><p id="59fa87e2-40c0-4283-9406-aa10207c7d28" class="">market</p><p id="c0dcc924-120b-4f86-bdbd-fc10b13c8272" class=""><strong>T-shaped designer: </strong>A designer who specializes in one kind of user experience (e.g.,</p><p id="1d588197-58fe-4c54-94a8-1e3d70c9f255" class="">interaction, visual, motion) and has a breadth of knowledge in other areas</p><p id="fd1692b7-0027-4a32-8e00-e1df4f51b9b2" class=""><strong>UX designers: </strong>Focus on how users interact with a product</p><p id="21543630-13a6-485a-baa3-a4c31d6a1d0a" class=""><strong>User experience:</strong> How a person, the user, feels about interacting with, or experiencing, a</p><p id="bb2e94e4-bd8e-4ed8-a8d8-f29ae74968b6" class="">product</p><p id="b15fc782-ab3a-4ce0-8e1d-934fe3ca2498" class=""><strong>UX engineers:</strong> Translate the design’s intent into a functioning experience</p><p id="110a4f57-530b-4164-a822-4a9b5bc7a51b" class=""><strong>UX program managers: </strong>Ensure clear and timely communication so that the process of</p><p id="00612c1f-bc53-400c-a91b-da6fb63b28b7" class="">building a useful product moves smoothly from start to finish</p><p id="b6c44459-81fc-47a2-9c6b-e674f43d7dd3" class=""><strong>UX research:</strong> Understand users and learn about their backgrounds, demographics,</p><p id="bac979b7-bf06-4e26-84c7-8af333ab07fd" class="">motivations, pain points, emotions, and life goals</p><p id="f422cdec-b163-4fa4-a69c-2a30f76e4b10" class=""><strong>UX researchers:</strong> A type of researcher that conducts studies or interviews to learn about the</p><p id="8bee20bf-a0a4-4c3d-a490-d8c8d5cb2211" class="">users of a product and how people use a product</p><p id="f21f3850-47f1-4503-861d-87a82d2f5205" class=""><strong>UX writers: </strong>Create the language that appears throughout a digital product, like websites or</p><p id="fc35ca0e-c0eb-48cc-8f45-64f5814dec90" class="">mobile apps</p><p id="896c2b18-0ccb-4356-81fa-d03d61258fec" class=""><strong>Visual designers:</strong> Focus on how the product or technology looks</p><p id="d03f20cb-c4a8-492d-a0de-0682ce16af43" class=""><strong>Wireframe: </strong>An outline or a sketch of a product or a screen</p><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">FIGMA GRID DESIGN</summary><div class="indented"><p id="d77596f0-82e6-4ed9-b6cb-fc066488f1c3" class="">Needs three layouts, one for desktop, one for mobile and one for tablet</p><ol type="1" id="bbc6a3db-1b81-493e-a692-2a0ca01b6307" class="numbered-list" start="1"><li>Destop</li></ol><p id="dfe633d3-d2f6-4288-8896-82c7f6cf82ce" class="">Next we need two grids, A horizontal grid and a vertical grid. This helps keep spaces consistent both.</p><p id="cce4deb5-47ff-44fd-843f-6fad21051808" class="">Next, select the desktop frame, go to <strong>grid layout, </strong>click on the <strong>+ icon </strong>the change the grid to <strong>columns.</strong></p><p id="6444b2e5-f2b8-4eb6-aa46-524d43dc128a" class="">For the desktop always use <strong>12 columns. </strong>Set the type to <strong>Stretch </strong>for responsiveness. Best practice, set <strong>gutter </strong>to <strong>32 </strong>and margin to <strong>160pts. </strong>this will set the container to <strong>1120pts</strong></p><p id="78db3008-ab68-452a-a20a-1043587ad931" class="">the margin depends on the size of container, the lesser the width of container, the more the margin. Tutor recommends <strong>1120pts for desktop, 680pts for tablet and 358pts for mobile</strong></p><p id="c08c9b37-117f-425f-bb50-1b88c0ff7231" class="">Creating the Vertical grid<br/>Click on the <br/><strong>grid layout + icon, </strong>this time change the grid to <strong>rows</strong></p><p id="eda02ef7-244e-401b-99e0-dfd1495f535d" class="">Set the Type to <strong>top —&gt; bmakes grid start from the top</strong></p><p id="ab21c5d4-7cf4-4cad-8815-6e5970facc85" class="">Set the count to sth huge like <strong>1000,</strong> set <strong>offset</strong> to<strong> 0,</strong> <strong>height</strong> set to <strong>8</strong> and <strong>gutter</strong> set to 8</p><ol type="1" id="c5f13c86-4ff9-4016-8766-40db46a61417" class="numbered-list" start="2"><li>Tablet</li></ol><p id="45916d7b-9bca-4558-a552-cdcd149be2a8" class="">For tablets, we use 8 columns</p><p id="1f671747-cf62-41f2-a214-945f7bdd1d19" class="">To quickly copy the styles from the desktop and apply them to tablet or phone, hover over the grid style(wait until cursor chnages to a hand). From this hit <strong>ctrl+c to copy</strong>, the select the tablet or mobile fram and hit <strong>ctrl+v to paste</strong></p><p id="883fd1ce-62a3-4134-acb3-c30b079ffd9f" class="">Now change:</p><p id="924dce8e-73e5-4e1c-b98d-c182fc6cced2" class=""><strong>columns</strong> from <strong>12 </strong>to <strong>8. </strong></p><p id="7beaa045-e7c4-46ae-b5f1-e627a58c1b93" class=""><strong>Margin </strong>from <strong>160 to 32</strong></p><p id="307d5973-e844-4599-bdbd-8ad5e03558e6" class=""><strong>gutter</strong> from <strong>32 to 16 </strong></p><p id="909e406e-ab08-41ec-a103-c1d0e36b040a" class="">
+</p><ol type="1" id="852d4d1e-f46c-4711-94ea-3f51d8148987" class="numbered-list" start="3"><li>Mobile Phone</li></ol><p id="09830bb7-9f4e-4f42-80fa-df2a7b1a514a" class="">Copy the grid styles as before</p><p id="b29cc969-2f1d-4d77-bb4b-682d6a8f8278" class="">Now change:</p><p id="c62b382e-82aa-4cfe-89a9-480cd2be5e07" class=""><strong>columns </strong>from 8<strong> </strong>to 4<strong>. </strong></p><p id="79344734-5f51-463f-b5ca-19e68388e6ef" class=""><strong>Margin </strong>from <strong> 32 to 16</strong></p><p id="d3411a35-dd50-4b36-8b80-1fe34db9ce65" class=""><strong>gutter</strong> = <strong>16 </strong></p><p id="a31ebcb3-b285-416e-9c79-67e6fb4d6b7d" class="">
+</p><p id="392a026e-9f09-4dd5-99e4-0d6322273e48" class="">This Grid system ensures that the designs are responsive on different screen sizes.</p><p id="89b7c818-ea65-4bf1-9a68-58653443f31e" class=""><strong>tips on using the grid system on projects</strong></p><p id="554cb495-59c2-4ba1-b78e-6e3097417a57" class="">The grid system we created is an 8pt,(all margins and gutters divisible by 8). when moving elements around, the default nudge is 10pts, to adjust this to go with our 8pts, we adjust the nudge parameters. <strong>go to files, quick actions, type nudge</strong></p><p id="d617e7ca-2d7c-4601-90db-b26ef0afc498" class="">Only the outer containers should align with the grid systems. contents of the containers dont need to be aligned.</p></div></details><p id="e6d11ad2-4887-48ca-a541-54a29a28c2f5" class="">
+</p><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">Week Two</summary><div class="indented"><h3 id="74b22c5c-7c1e-4fb3-a2a8-acdeab7cd477" class=""><strong>universal design, inclusive design and equity-focused design</strong></h3><p id="e4495a36-195b-401a-b6bc-83864d635885" class=""><strong>Universal design: </strong>process of creating one product for users with the widest range if abilities and in the widest range of situations. down side of this mode is that it doesnt cover all users. A type of design we can say <strong>“one size fits all”</strong></p><p id="430f6215-bf27-4457-b8c7-5b7e2a802ec1" class=""><strong>Inclusive design: </strong>Making choices that taje ubnti account personal identifiers like: </p><ol type="1" id="b2f2061d-f918-423e-8786-78ea413bc4a5" class="numbered-list" start="1"><li>Ability </li></ol><ol type="1" id="055eea8a-b9c5-411d-a554-878ace9ec724" class="numbered-list" start="2"><li>Race</li></ol><ol type="1" id="c921b6db-cf33-4833-b707-e7709cccca8d" class="numbered-list" start="3"><li>Economic Status</li></ol><ol type="1" id="21098d77-fa65-4597-9293-9c7796de0868" class="numbered-list" start="4"><li>Languange</li></ol><ol type="1" id="34256446-2b81-4f20-a6be-555e00decb1f" class="numbered-list" start="5"><li>Age </li></ol><ol type="1" id="dfb0184f-3e6c-4507-ae8b-6e493ec74ee2" class="numbered-list" start="6"><li>Gender</li></ol><p id="a292b886-3ec1-46c2-bd6f-72a9fdc25a50" class="">This mode of design includes researchers from marginalized  populations to ensure that the final design takes them into account. A type of design where we can say <strong>“solve for one, extend to many”.  </strong></p><p id="96c63673-1486-48b7-ad6c-273b72094a7a" class=""><strong>Accessibilty: </strong>the design of products, devices, services, or environments for people with disabilities.</p><p id="a80c3d13-152a-426f-8528-3bd3316d1f8d" class="">inclusive design still has its shortcoming in that it doesnt take into account populations that were not invloved in research process. What we can do is do an equity-focused design.</p><p id="86bc4834-c1e4-479e-a89a-c6d3e1ea80a7" class=""><strong>Equity-focused design: </strong>Designing for groups that have been historically under-represented or ignored when building products.</p><p id="91eefb81-d98f-4516-964a-c5191a83d810" class=""><strong>Equality vs Equity : </strong><br/>Equlaity: providing the same amount of opportunity and support to members of society.<br/></p><p id="bab510c2-e333-418b-9309-58310992dfa3" class=""><strong>Equity: </strong> Means providing different levels of opportunity and support foreach person in order to achieve fair outcomes. </p><p id="2096a9e7-5233-4169-b0c5-1d12658cd180" class="">
+</p><figure id="28dcba9c-516d-47c9-bc38-dfd06a3b3a93" class="image"><a href="COURSERA%20UI%20UX%20efe92b6c613c4f0db67ff8926888e3f6/Screenshot_2024-03-22_105201.png"><img style="width:556px" src="COURSERA%20UI%20UX%20efe92b6c613c4f0db67ff8926888e3f6/Screenshot_2024-03-22_105201.png"/></a></figure><p id="260c085e-d96d-4013-ae1c-4e38b8f80277" class="">
+</p><p id="e06df210-2012-4355-b31d-fba5e3442c8d" class=""><strong>Importance of equity-focused design</strong></p><p id="910620d6-7f1d-4044-ba3a-8bb28d1edaef" class="">An equity focused design means thinking thori=ough all the aspects of a designed product and making sure the product is both accessible and fair to all genders, races and abilities. The designs need to specifically consider underrepresented and excluded groups.</p><p id="32788e75-515c-465f-b661-e4296a29e789" class="">Consider wordings to accomodate users, eg. on aform where we need to collect gender data:</p><p id="4a7b28e5-48d2-432b-9bcd-287a345d02fc" class="">example 1. select gender:<div class="indented"><p id="f6259bb6-1ea9-4e90-ad7a-dde10595eb3f" class="">male </p><p id="c2107d1b-090d-4a6d-87a3-7c2c646a3654" class="">female</p><p id="821e19f4-0c5e-4a93-b582-0e13d0ed2529" class="">Other</p></div></p><p id="de179fac-e58c-4a93-91a8-fd1cdd915232" class="">example two:<div class="indented"><p id="b2275df9-48e0-4470-988b-ee4ded0ed574" class="">male </p><p id="cdc00e66-5b04-4e39-a2d9-1d81b5d04451" class="">female <br/>gender-nonconforming<br/></p><p id="c71defbd-f155-4a12-ac8c-377215126c05" class="">Non binary</p><p id="2892d1fc-3a66-476c-80d6-cd647a63cd29" class="">[blank field]</p></div></p><p id="fb5f3d93-2da0-42cd-9900-a7166ad74614" class="">
+</p><p id="245501a4-eec8-4083-901a-2c9a72c3ee64" class="">The second example is more accomodative compared to the first one as it makes different people feel accomodated. <br/><br/></p><h2 id="4c89beed-11e3-4dc3-8cb2-d3d010e6093b" class="">Platforms<br/><br/><strong>A platform is the medium the users experience your product on, such as mobile web, mobile app, desktop, tablets, wearables, smart displays etc.</strong></h2><p id="439ea8ec-e9ff-4bbe-8863-06e5c1d09b82" class="">Keep your brand identity consistent across all platforms. </p><p id="b047d3d0-344b-4cde-9f16-0ede40028f30" class="">Designing for desktops and mobile phones. <br/>Mobile.<br/>- The average session time for a person using a mobile phone is<br/><strong> 72 seconds</strong><br/> while the average desktop session is <br/><strong>150 seconds. </strong></p><ul id="bbbfa19a-c8fa-406d-8426-db5c25d4e298" class="bulleted-list"><li style="list-style-type:disc">Responsiveness<ul id="446abe8b-c730-4c5f-9b1a-bdbae73b4496" class="bulleted-list"><li style="list-style-type:circle">Allows a website to change automatically depending on the size of the device.</li></ul><ul id="1a0d93fe-d8cc-4083-990b-b072c28abf4c" class="bulleted-list"><li style="list-style-type:circle">Call to Action buttons on mobile phones should be placed <strong>front and center </strong>allowing user to easily complete their desired tasks</li></ul><ul id="51f34966-7ca9-44ee-8fcd-fa529528349b" class="bulleted-list"><li style="list-style-type:circle">Navigation menus on phone should be short and simple</li></ul><ul id="a5cdbc81-2b02-485c-b01a-247358d6ec59" class="bulleted-list"><li style="list-style-type:circle">Use gestures that users already do like <strong>swipping and tapping. </strong>Gestures should be intuitive and familiar to users.</li></ul><ul id="bd85a82c-96d4-4fb2-9c30-cab145c93c5e" class="bulleted-list"><li style="list-style-type:circle">Design for both horizontal view and vertical view of the phone</li></ul><ul id="f35a54d4-c477-4d1e-8b77-ded64b25c5a5" class="bulleted-list"><li style="list-style-type:circle">Reduce visual clutter. Keep visuals simple.</li></ul><ul id="6af850f6-aec3-4426-9164-521bf1c3ed0b" class="bulleted-list"><li style="list-style-type:circle">Remember users behave differently on different devices.</li></ul></li></ul><p id="fec784ad-d764-41d6-89c3-9eaa89842f4d" class="">
+</p></div></details></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

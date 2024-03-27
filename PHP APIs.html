@@ -1,0 +1,738 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>PHP APIs</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="30b01294-1d4c-4d80-a006-783bdda7e31e" class="page sans"><header><h1 class="page-title">PHP APIs</h1><p class="page-description"></p></header><div class="page-body"><p id="80eb3b65-3dae-4bfd-8c7a-e1d41c774d8f" class="">The goal of this documentation is to create a path for me to follow when dealing with APIs in laravel. Mostly on the authentication side using <strong>sanctum.</strong></p><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">What is an API</summary><div class="indented"><p id="50efae8b-5b8f-4089-b8bc-f9da2c674a12" class="">An <strong>Application programming interface </strong>is essentially a <strong>messenger </strong>that allows different software programs to communicate to each other. Can be compared to a <strong>waiter </strong>in a restaurant who takes your order(<strong>Request</strong>) and takes it to the kitchen(<strong>server</strong>) and brings back your food(<strong>Response</strong>).</p><p id="4909c27d-9867-46cb-ae1e-ea16e15db104" class="">API allow developers to access functionalities and data offered by another system without needing to write the code themselves.</p><p id="53f2f5a5-ce37-40ff-8625-39da36a0965c" class="">APIs are often documented in an <strong>API specification </strong>that  developers can use to understand and integrate with the API.</p><p id="6977d290-2e15-4c0a-8df5-b2ab34133f83" class=""><strong>Types of APIs</strong></p><ol type="1" id="ec9127c7-a9d7-487c-ad40-1be2f641e1e3" class="numbered-list" start="1"><li><strong>REST APIs: </strong>Follow standard set of principles for building web APIs, making them widely adopted and easy to use.</li></ol><ol type="1" id="770a5c55-66c9-48fb-9a13-baeaa408cf41" class="numbered-list" start="2"><li><strong>SOAP APIs: </strong>use XML for messages and follow a more structured approach, often used for enterprise applications.</li></ol><ol type="1" id="1c96183a-4d6a-4efb-aa14-f1e9b68d176c" class="numbered-list" start="3"><li><strong>GraphQL APIs: </strong>allow clients to specify exactly what dat they need, leading to more efficient data fetching. </li></ol><p id="289b25f5-dd4b-4c2d-b227-d4db45b7343c" class="">Example:</p><ul id="3f4c394f-b2ab-4213-9170-63aef3cc3076" class="bulleted-list"><li style="list-style-type:disc">• When you log in to a website using social media authentication, the website uses an API to connect to the social media platform and verify your identity.</li></ul><p id="d0b0b873-0b4d-4dfd-86b4-61422663059b" class=""><strong>Benefits of using APIs</strong></p><ol type="1" id="4e2df4dd-0413-4902-a886-8accfc305005" class="numbered-list" start="1"><li>Increased reusability and flexibility: Devs can easily intgrate functionalities from diffrent systems without reinventing the wheel.</li></ol><ol type="1" id="7443fc47-a37c-4dd8-bb7a-7e7e724f34ad" class="numbered-list" start="2"><li><strong>Improved developer productivity</strong> : APIs provide a ready-to-use interface, allowing developers to focus on building their own applications. </li></ol><ol type="1" id="ce7a0f8f-366c-4958-a60b-32e954d47026" class="numbered-list" start="3"><li><strong>Faster time to market:</strong> By leveraging existing APIs, companies can launch new features and products more quickly.</li></ol><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">RESTful APIs</summary><div class="indented"><p id="a0c05402-dc6d-4be5-b6fc-4869e725f896" class="">Short for <strong>Representational State Transfer APIs</strong>, are a set of architectural principles and constraints for designing and interacting with the web services. REST is not a protocol but rather a style of architecture that uses HTTP methods(GET, POST,PUT,DELETE) for communication and is oftenly used in the context of webservices.</p><p id="fbec4da9-a7f0-4a28-84c7-f7e0a32b8ec0" class="">RESTful APIs have <strong>Standard media types, </strong>i.e data is exchanged in standard formats like JSON or XML, makinh it easy for differnt applications to understand and process.</p><p id="a8877bc0-8428-4f10-89a1-e8892f997810" class="">Examples</p><p id="fc547444-e644-4822-ae10-652918814c3e" class="">Web services like twitter, Facebook and google offer RESTful APIs for programmatic access of their data.</p></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Php APIs</summary><div class="indented"><p id="8990feb6-ef81-44b2-b039-35b69abd0d68" class="">To develop apis, we follow the normal LARAVEL project creation steps</p><p id="8994b04c-a93d-47c3-a10e-76918ee3f0ef" class="">after installing breeze and blade, you can then create models specific to your API endpoints and use appropriate Laravel features like controllers, routes, and middleware to handle API requests and responses.</p><p id="c2ee30c8-716a-4578-94aa-bf4267fe5c11" class="">We may choose to develop Api only applications, and here Laravel breeze and blade are not needed.</p><p id="748fa784-41bf-4645-9787-c8153b60b730" class="">But in our case, well just install them.</p><p id="ecc1939e-b8ad-4a06-80da-a5465804fe3d" class="">
+</p><p id="03b6c2b5-cda3-48f4-a264-acba803b5c54" class="">In the case of this documentation, i will take my <strong>TAsk-manager app </strong>that i created.</p><ol type="1" id="c5086fb4-f9f5-4124-b3b1-70fd99a0acea" class="numbered-list" start="1"><li>create a tasks model</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="30b3b92a-cd01-4bfd-9cec-0ba44f2b7a15" class="code"><code class="language-PHP"> php artisan make:model -mrc Task</code></pre><ol type="1" id="eb5b24aa-7d74-4266-890c-fc070add228a" class="numbered-list" start="2"><li>After creating this, go to migration <strong>create_tasks_table</strong> file and edit it:</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="462db4e7-7c47-4f8b-95fd-977109ef698c" class="code"><code class="language-PHP">&lt;?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create(&#x27;tasks&#x27;, function (Blueprint $table) {
+            $table-&gt;id();
+            $table-&gt;foreignId(&#x27;user_id&#x27;)-&gt;constrained()-&gt;cascadeOnDelete();
+            $table-&gt;string(&#x27;title&#x27;);
+            $table-&gt;string(&#x27;description&#x27;);
+            $table-&gt;timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists(&#x27;tasks&#x27;);
+    }
+};</code></pre><ol type="1" id="dade7cef-feec-4d2d-8a9c-bebd757aae9d" class="numbered-list" start="3"><li>Next, we will create go to our Task model and establish a relationship between the Task model and User Model so that, a task belongs to a model and a User has many tasks.</li></ol><ol type="1" id="84ad3109-fb01-4d94-8a67-52a08a55ed74" class="numbered-list" start="4"><li>We will be using <strong>Laravel Sanctum </strong>authentication for our apis. Laravel Sanctum needs a user to be authenticated before he/she can perfom Api actions. </li></ol><ol type="1" id="c86dc9f6-def3-422c-9590-65c9b46c1921" class="numbered-list" start="5"><li>laravel sanctum is a package that provides simple and secure way to authenticate <strong>single-page application(SPA)</strong> to your laravel API. It uses Json web Tokens(JWT) for authentication.</li></ol><ol type="1" id="5110e945-9c07-47b5-bd70-a8c0492ee188" class="numbered-list" start="6"><li>Setting up sanctum:</li></ol><ol type="1" id="0fdeb72b-7787-40fe-9711-179763347692" class="numbered-list" start="7"><li>Sanctum expects that you have <strong>/register and /login </strong>routes. </li></ol><p id="5a3fd1ce-5db4-44eb-bd8c-e0fdcf4f3df9" class="">
+</p><ul id="46a1be82-551e-4540-9de0-86d134f5c3d8" class="bulleted-list"><li style="list-style-type:disc">install sanctum</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="bccf486d-0b0f-4268-a398-5cb604bd0bd8" class="code"><code class="language-PHP">composer require laravel/sanctum</code></pre><ul id="8812ad5a-9aea-418b-b4ce-1ddac4a4a963" class="bulleted-list"><li style="list-style-type:disc">publish sanctum configurations and migrations.</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="101b5752-1a97-44a0-a309-8f59cee9f05c" class="code"><code class="language-PHP">php artisan vendor:publish --provider=&quot;Laravel\Sanctum\SanctumServiceProvider&quot;</code></pre><ul id="00f878aa-750a-40e0-9e2e-261fe39ae0b0" class="bulleted-list"><li style="list-style-type:disc">If using <strong>MongoDB </strong>you need to navigate to <strong>vendor/laravel/sanctum/src/PersonalAccessToken.php </strong>and replace use <strong>Illuminate\Database\Eloquent\Model;</strong> with <strong>use MongoDB\Laravel\Eloquent\Model;</strong></li></ul><ul id="9a5c2cf4-65a4-4e48-bd48-c99465e74fff" class="bulleted-list"><li style="list-style-type:disc">run  migrations</li></ul><ul id="0feb6cb6-1bad-4926-bd3a-5acd20a0d4c8" class="bulleted-list"><li style="list-style-type:disc">Next, if you plan to utilize Sanctum to authenticate a SPA, you should add Sanctum&#x27;s middleware to your <code><strong>api</strong></code> middleware group within your application&#x27;s <code><strong>app/Http/Kernel.php</strong></code> file:</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="551fa71e-5001-49df-8900-98c3834b326b" class="code"><code class="language-PHP">&#x27;api&#x27; =&gt; [
+\Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+\Illuminate\Routing\Middleware\ThrottleRequests::class.&#x27;:api&#x27;,
+\Illuminate\Routing\Middleware\SubstituteBindings::class,
+],</code></pre><ul id="d0671c50-3574-407d-afc6-a5679a23b00f" class="bulleted-list"><li style="list-style-type:disc">provide a route inside web.php file that generates the API auth TOKEN. This token can be used in postman when testing our API. Under authorization →Bearer token→token</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="f29dc30f-218e-4489-afb3-cbf3bdac6584" class="code"><code class="language-PHP">// Sanctum API token retrieval route inside web.php
+Route::get(&#x27;/api/token&#x27;, function (\Illuminate\Http\Request $request) {
+    return response()-&gt;json([&#x27;token&#x27; =&gt; $request-&gt;user()-&gt;createToken(&#x27;auth-token&#x27;)-&gt;plainTextToken]);
+});</code></pre><p id="4b4972c1-2a2e-451c-886b-0f480649909c" class="">With this, run migrations so that we have the tasks table. </p><p id="1fc9efa3-4a6d-46ab-b688-7b6112d52c62" class="">Update the store method in Task controller so that its possible to store data to the database. we will use Postman to simulate our API and see if its working. we will be perfoming crud operations.</p><p id="1653f01f-2199-44d7-9f98-0863149f5026" class="">For our tasks, we will provide a resource route inside <strong>api.php. </strong>this file is specifically designed to define routes intended for API endpoints. It separates Api routes from web routes.</p><p id="1f7702e6-bf72-4ddc-bbfc-1e90a90060b9" class="">API routes defined in <code>api.php</code> are prefixed with <code>/api</code>, creating a consistent base URL for API endpoints.</p><p id="8ef01996-ab41-475d-b2aa-b73eed7fe348" class="">All routes that should be sanctum authenticated should be passed through a<strong><mark class="highlight-yellow_background"> sanctum middleware.</mark></strong></p><p id="4a726223-4298-4f29-9252-642afa8a31bf" class="">example:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="ef664b01-efa2-40d4-811b-bf891edfbbd8" class="code"><code class="language-PHP">&lt;?php
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaskController;
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register API routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the &quot;api&quot; middleware group. Make something great!
+|
+*/
+
+Route::middleware(&#x27;auth:sanctum&#x27;)-&gt;get(&#x27;/user&#x27;, function (Request $request) {
+    return $request-&gt;user();
+});
+//All routes require that they be authenticated via sanctum authentication.
+Route::middleware(&#x27;auth:sanctum&#x27;)-&gt;group(function () {
+    Route::resource(&#x27;tasks&#x27;, TaskController::class);
+});</code></pre><p id="ae247504-6c68-449e-9cca-dd25e10fc727" class="">
+</p><blockquote id="7be666bb-3773-4895-b93b-b2f6ea410249" class="block-color-yellow_background">Its good Practice to always <strong>php artisan route:cache </strong>after making chnages to routing configurations eg adding or editing existing routes</blockquote></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Testing on postman</summary><div class="indented"><p id="015dd1d9-ce7b-423d-bb15-dca298d53bb1" class="">Testing your API on postman, depends on what data you want to use. If your Api does not have a front end and you want to test its functionality on postman,</p><p id="643821ac-3c49-427b-96c1-152209e4e448" class="">Authentication:</p><p id="2e2f70ad-bf40-48cb-962f-3c42d2721acd" class=""><strong>Request Headers:</strong></p><p id="6e197587-0ed5-4263-bbd0-9f2ceb08d310" class="">If your API endpoints require headers such as authentication tokens or content type, add them in the headers section. eg csrf token</p><p id="a3ffcd8d-cf31-4a1c-b221-6596edfb8b08" class="">for requests that need you to provide data such as when simulating a login, you need to have an email and password. this data is passed via json objects. so we add headers to support this type of content by:<br/>Go to headers, add a key <br/><strong>accept </strong> and the value should be <strong>application/json. </strong></p><p id="32fcaf08-c164-4b42-9ec7-7d92565f1adc" class="">
+</p><figure id="2b6843cf-2128-43a8-8785-34d9cf1e0064" class="link-to-page"><a href="https://www.notion.so/Laravel-API-using-passport-Authentication-productsApp-2b6843cf212843a8878534d9cf1e0064?pvs=21">Laravel API using passport Authentication(productsApp)</a></figure></div></details></div></details></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

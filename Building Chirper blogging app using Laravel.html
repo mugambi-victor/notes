@@ -1,0 +1,1176 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Building Chirper blogging app using Laravel(Laravel Bootcamp)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="7047fbbc-5de0-47a0-8c9f-892954c4e066" class="page sans"><header><h1 class="page-title">Building Chirper blogging app using Laravel(Laravel Bootcamp)</h1><p class="page-description"></p></header><div class="page-body"><ul id="2fabd07a-772c-499a-bd80-6761b19a6908" class="toggle"><li><details open=""><summary><strong>Question: Where do we start</strong></summary><ol type="1" id="e7525cd8-5ca2-4c9e-a6a5-17587460845d" class="numbered-list" start="1"><li>Install laravel and composer to set up your laravel environment</li></ol><ol type="1" id="82dd4327-4253-40bd-80ad-9ba5a9a2158f" class="numbered-list" start="2"><li>create the project: <strong>composer create-project laravel/laravel chirper</strong></li></ol><ol type="1" id="cf3fb2e1-db75-4aea-8b8d-172a4f7bfebf" class="numbered-list" start="3"><li>For this project, we use <strong>sqlite</strong>. As it is more lighteweight compared to <strong>MYSQL. </strong></li></ol><ul id="fa520c07-8718-4417-a1cd-dccd414e4736" class="bulleted-list"><li style="list-style-type:disc">SQLite is a file-based database, which means it doesn&#x27;t require a separate server process and can be easily included in a project.</li></ul><ul id="93ce40aa-c138-43ae-af73-bc7f91f34157" class="bulleted-list"><li style="list-style-type:disc">It simplifies the development and testing process by allowing developers to work with a lightweight database that doesn&#x27;t require complex server configurations.</li></ul><ol type="1" id="14373fb8-9639-41be-8253-6c27f1837dd7" class="numbered-list" start="4"><li>create a sqlite file inside <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>databases directory</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></li></ol><ol type="1" id="f1882c70-ec01-4124-a0ef-730da7503bb9" class="numbered-list" start="5"><li>To instruct Laravel to use SQLite instead of MySQL, update your new application&#x27;s <code>.env</code> file and remove all of the <code>DB_*</code> environment variables except for the <code>DB_CONNECTION</code> variable, which should be set to <code>sqlite</code></li></ol><ol type="1" id="46083be7-07dc-4c19-8cd4-3452f03ffdb1" class="numbered-list" start="6"><li>Install <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Laravel Breeze, </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong> which is a simple implementation of all Laravel’s authentication features, including login, registration, password reset, email verification, and password confirmation. Once installed, you are welcome to customize the components to suit your needs.</li></ol><pre id="0c6d568d-75d0-48da-83e9-753b30212c89" class="code"><span><code>composer require laravel/breeze --dev</code></span></pre><pre id="5213a466-9da9-4cfa-b542-c2dca1d4bec2" class="code"><span><code>php artisan breeze:install blade</code></span></pre><ol type="1" id="16157538-d3be-4ecd-9f6a-24ced84abbd4" class="numbered-list" start="1"><li>Breeze will install and configure your front-end dependencies for you, so we just need to start the Vite development server to automatically recompile our CSS and refresh the browser when we make changes to our Blade templates:</li></ol><ol type="1" id="f7c6faf0-2426-4106-9f8a-fdce797d98ed" class="numbered-list" start="2"><li><code>npm run dev</code></li></ol><ol type="1" id="6eb65a76-a14d-4b2a-b8ec-eab692f7c963" class="numbered-list" start="3"><li>Now run your database migrations: i.e <strong>php artisan migrate.</strong></li></ol><ol type="1" id="2d11d4f7-6b99-4af6-877c-5561f05aae73" class="numbered-list" start="4"><li>With these, we can log into our system. Create your first user.</li></ol><ol type="1" id="b3c9958e-f6c9-4ef7-8640-c5e9a4d4ee16" class="numbered-list" start="5"><li>Now we want to create models for our chirps. a model is an interesting way to interact with your database tables.</li></ol><pre id="f683dc46-b9b3-4db8-855f-c0ac44e40979" class="code"><span><code>php arstisan make:model -mrc Chirp</code></span></pre><ol type="1" id="0b17e4ae-c05a-4b90-920b-5f3057ce7f08" class="numbered-list" start="1"><li><strong><strong><strong><strong><strong><strong><strong><strong>-m: </strong></strong></strong></strong></strong></strong></strong></strong>This creates a migration file in the <code><strong>database/migrations</strong></code> directory. The migration file is used to define the structure of the database table associated with the model.<br/><br/><strong><strong><strong><strong>-r: </strong></strong></strong></strong>This generates a resource controller in the <code><strong>App\Http\Controllers</strong></code> directory. Resource controllers provide a convenient way to organize CRUD (Create, Read, Update, Delete) operations related to a model.</li></ol><ul id="03498af9-b493-4b8b-9e21-54b113fa3811" class="bulleted-list"><li style="list-style-type:disc">-<code><strong>c</strong></code>: This creates a plain controller without the resourceful methods typically used for CRUD operations.</li></ul><ol type="1" id="8b62e615-8a11-4d2c-9ca3-a23c624bf8aa" class="numbered-list" start="14"><li><strong><strong><strong><strong><strong><strong><strong><strong>Routing</strong></strong></strong></strong></strong></strong></strong></strong></li></ol><ul id="a6255b74-ba98-467f-b8db-04fee7f4c482" class="bulleted-list"><li style="list-style-type:disc">We need to create routes for our controller. We can do this by adding “routes”, which are managed in the <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>routes directory </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>of your project. </li></ul><ul id="82aa60b7-93de-4ce7-96f7-bce3bb56c72d" class="bulleted-list"><li style="list-style-type:disc">Because ours is a resource controller, we can use a single resource Route i.e <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong> Route::resource() </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>to define all the routes following a conventional URL structure.</li></ul><ul id="1a7231e3-fe3e-4873-8d6d-30edce80ead9" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Resourceful routes: </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>These routes provide a convenient wayto define routes for CRUD operations on a resource. These routes are defined using <strong>resource method .</strong></li></ul><pre id="29e0a0b0-4308-4bfe-b8e8-559000f276b7" class="code"><span><code>//A resourceful route
+// routes/web.php or routes/api.php
+
+use App\Http\Controllers\TaskController;
+
+Route::resource(&#x27;tasks&#x27;, TaskController::class);</code></span></pre><ol type="1" id="6dc7c92a-3621-4681-9174-945b8f5dfa00" class="numbered-list" start="15"><li>To begin with, we will create two routes first. </li></ol><ul id="b7469eef-9739-48bc-aa00-e8b622531f68" class="bulleted-list"><li style="list-style-type:disc">index route which will display a form and a listing of chirps.</li></ul><ul id="a7845861-c083-4c98-8ad0-316d07c67c14" class="bulleted-list"><li style="list-style-type:disc">the store route which will be used for saving chirps.</li></ul><ol type="1" id="1a243ef7-d291-4908-84a3-80fe5cc4d5ea" class="numbered-list" start="16"><li>We are also going to place these routes behind two <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>middleware </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></li></ol><ul id="1301b3d6-f379-4fd7-a9ba-fa2e121ff37f" class="bulleted-list"><li style="list-style-type:disc">The <strong><strong><strong>auth </strong></strong></strong>middleware which ensures that only logged-in users can access the route</li></ul><ul id="7f07807b-2383-4264-a3cd-de6ab19f53d9" class="bulleted-list"><li style="list-style-type:disc">the <strong><strong><strong><strong><strong><strong><strong><strong><strong>verified </strong></strong></strong></strong></strong></strong></strong></strong></strong>middleware will be used if you decide to use email verification</li></ul><ul id="47a9315b-c27a-4c56-836c-0794bc86bb61" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Middleware </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>in laravel provides a convenient way for filtering HTTP requests that enter your application. </li></ul><ul id="5f2878b6-a288-4c6e-aa35-0a19cdb381c5" class="bulleted-list"><li style="list-style-type:disc">Middleware can be used to perform tasks such as Authentication, logging, CORS handling and more.</li></ul><ul id="2661aa53-3131-4f0c-a461-692465fc03f6" class="bulleted-list"><li style="list-style-type:disc">Middleware operates on the request before it reaches the controller, allowing you to modify the request or perform certain actions.</li></ul><ol type="1" id="b3a900eb-4d53-4bf2-a1a6-d233ffe2c9da" class="numbered-list" start="17"><li>We can now test our route by by returning a test message from the <code>index</code> method of our new <code>ChirpController</code> class:</li></ol><pre id="af2af09e-e607-4866-a0bd-25ea2ff69936" class="code"><span><code>public function index()
+    {
+        //
+        return (&#x27;Hello wolrd&#x27;);
+    }</code></span></pre><ol type="1" id="6dfb519c-a0be-491e-be55-b10b2a1402bc" class="numbered-list" start="18"><li>If you type in <strong>localhost/chirps</strong>, it will return <strong>“hello world”</strong> to the browser.</li></ol><ol type="1" id="b185ea5a-cf7b-495c-9c24-e8ef140c8df1" class="numbered-list" start="19"><li>Now we can go ahead and create a view <strong>index.blade.php.</strong></li></ol><ol type="1" id="4038801f-9f20-409f-91fe-6f7f2c2d5c8c" class="numbered-list" start="20"><li>All views are to be created under <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>resources→views </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>folder.  </li></ol><ol type="1" id="62b5d443-c72e-44f6-86dd-5e8fd215285a" class="numbered-list" start="21"><li><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Laravel Breeze </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>comes with a navigation menu, which we can incorporate in our app.<br/>Update the <br/><code>navigation.blade.php</code> (located inside <strong>views→layouts</strong>)component provided by Breeze to add a menu item for desktop screens: </li></ol><ol type="1" id="07818f0c-b6e6-4dee-b233-9e06842671c1" class="numbered-list" start="22"><li>Start from Saving the chirp.</li></ol><ol type="1" id="e49c717d-3b93-4828-960b-ebc01a833298" class="numbered-list" start="23"><li>Our chirps form has been configured to post messages to the <a href="http://chirps.store">chirps.store</a> route that we created. Lets update our store method in ChirpsController class ro validate data and create a new chirp</li></ol><ol type="1" id="99568d7f-5f29-45ec-924f-6de5fedc1554" class="numbered-list" start="24"><li><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Mass assignment vulnerability: </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>occurs when you want to update a model, so you have code like this:<br/><br/></li></ol><pre id="8875b6b7-5afb-4bd7-8991-3588fa270b54" class="code"><span><code>public function update(Talk $talk)
+{
+$talk→update([
+‘title’⇒request(’title’),
+‘description’⇒request(’description’),
+]);
+}</code></span></pre><p id="1887d6d4-59ec-4543-8b70-687d3a7dd0fd" class=""><strong>Mass assignment simply means assigning values to more than one db column.(my own language).</strong></p><pre id="eed2fde1-4be1-478f-9e89-df14bdaaad8f" class="code"><span><code>public function update(Talk $talk)
+{
+//mass assignment as this will update all fields
+// in a model
+$talk→update(request()-&gt;(all));;
+}</code></span></pre><ol type="1" id="8e8ee234-493f-46ed-a092-fd4e40966f0a" class="numbered-list" start="25"><li>The problem is never mass assignment, the problem is never specifying which fields you want to change. So we must take care of this, we must specify the <strong><strong><strong><strong><strong>changeable </strong></strong></strong></strong></strong>fields.</li></ol><ol type="1" id="0275ca90-79b5-4abd-aeb6-899342fb9b5d" class="numbered-list" start="26"><li>Instead of <strong>$talk→update(request()-&gt;(all)); </strong>you can specify the fields you want to update by passing in an array with the fields you want to update. i.e <strong>$talk→update(request()-&gt;([’title’, ‘description’])); </strong></li></ol><ol type="1" id="b26677cf-de86-4515-beff-de5dbb8aa82a" class="numbered-list" start="27"><li>The best way to go about it is to explicitly declare the fields you want to update.</li></ol><pre id="1023bbba-a7c4-4561-9a3c-ba040354a077" class="code"><span><code>public function update(Talk $talk)
+{
+$talk→update([
+‘title’⇒request(’title’),
+‘description’⇒request(’description’),
+]);
+}</code></span></pre><ol type="1" id="731eda9c-db54-410c-ad50-b34aa8822cb7" class="numbered-list" start="28"><li><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>The fillable </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>attribute enable you to specify which fields can be mass assigned.</li></ol><ol type="1" id="9743790c-aecd-45d4-b317-8633125924e1" class="numbered-list" start="29"><li><strong><strong><strong><strong><strong><strong><strong><strong>Guarded </strong></strong></strong></strong></strong></strong></strong></strong>attribute enables you to specify fields which cannot be mass assigned.</li></ol><ol type="1" id="937f85ff-ac0c-4a3c-bcfd-10d4208efb4e" class="numbered-list" start="30"><li>The<strong> fillable and guarded</strong> attributes are used inside <strong>Models.</strong></li></ol><p id="ffd7b507-9e83-420d-b45d-0b159dbafcf5" class="">example</p><pre id="7b455b05-7392-4cf8-aa0e-e6deb3b1c406" class="code"><span><code>&lt;?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Chirp extends Model
+{
+    use HasFactory;
+//the message field of chirps model is the only
+// one that can be mass assigned.
+    protected $fillable=[
+        &#x27;message&#x27;,
+    ];
+}</code></span></pre><ol type="1" id="f772314f-a2e3-4914-81dd-cdb618506527" class="numbered-list" start="31"><li>Go to your create_chirps_table and update the tables schema</li></ol><pre id="c2a5dc1e-b161-43c0-b0c0-09f64b72c6fc" class="code"><span><code>&lt;?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create(&#x27;chirps&#x27;, function (Blueprint $table) {
+            $table-&gt;id();
+            $table-&gt;foreignId(&#x27;user_id&#x27;)-&gt;constrained()-&gt;cascadeOnDelete();
+            $table-&gt;string(&#x27;message&#x27;);
+            $table-&gt;timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists(&#x27;chirps&#x27;);
+    }
+};</code></span></pre><ol type="1" id="499252c4-adc4-4e93-8a43-f2c788fa76bd" class="numbered-list" start="32"><li>With that, run <strong>php artisan migrate</strong> and you can create your first chirp now.</li></ol><ul id="33bf251d-6766-453f-8ccd-f13b45f243a9" class="toggle"><li><details open=""><summary>Laravel creating relationships:</summary><p id="0dfa5515-5320-4078-8517-0d5e1680cd2c" class="">Relationships are used to define how models(db tables) relate to one another.</p><p id="812b9d69-aee5-4d35-ae09-06e6b8c69d1c" class="">These relationships should be included in all your models</p><ul id="0632c70a-58b8-4863-ae09-d5ea28b2f6f0" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>One to One Relationship<br/><br/></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>One record in a table is associated with one record in another table.</li></ul><ul id="51e1926f-3db8-4852-89d7-8c04e90a1659" class="bulleted-list"><li style="list-style-type:disc">Defined using the <strong><strong><strong><strong><strong><strong><strong>hasOne </strong></strong></strong></strong></strong></strong></strong>and <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>belongsTo </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>methods</li></ul><pre id="a477b8b0-0ab6-4a63-9dc6-fca39ad9912a" class="code"><span><code>// User model
+public function phone()
+{
+    return $this-&gt;hasOne(Phone::class);
+}
+
+// Phone model
+public function user()
+{
+    return $this-&gt;belongsTo(User::class);
+}</code></span></pre><ul id="9f27fa25-7694-4e31-bf4a-75a36332a158" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>One to Many Relationship</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><ul id="3bcdf5e0-359c-4aa9-9015-c5f3fe863389" class="bulleted-list"><li style="list-style-type:circle">In this type of relationship a record in one table is associated with more than one record in another table. eg a user in users table can be associated with more than one post in posts table. or a Post in post table can associated with more than one comment.</li></ul><ul id="784b000e-483d-4add-8286-09eac0f4e4ac" class="bulleted-list"><li style="list-style-type:circle">Defined using the <code><strong>hasMany</strong></code> and <code><strong>belongsTo</strong></code> methods.<br/>example<br/></li></ul><pre id="06102a54-0578-40d7-9973-f0b067954ff8" class="code"><span><code>// Post model
+public function comments()
+{
+    return $this-&gt;hasMany(Comment::class);
+}
+
+// Comment model
+public function post()
+{
+    return $this-&gt;belongsTo(Post::class);
+}</code></span></pre></li></ul></details></li></ul></details></li></ul><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Retrieving chirps and displaying them to a view.<br/><br/></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>To retrieve chirps that have already been created, </summary><div class="indented"><ul id="5eca2873-3660-4bb0-bf68-08b2387f15c2" class="bulleted-list"><li style="list-style-type:disc">Update the <strong><strong><strong><strong><strong>index</strong></strong></strong></strong></strong> method of our <strong>ChirpController class</strong> to pass Chirps from every user to our index page:</li></ul><pre id="b6522c84-cb22-4b5e-afd2-482fcf876166" class="code"><span><code>public function index()
+{
+			return view(&#x27;chirps.index&#x27;, [&#x27;chirps&#x27;=&gt;Chirp::with(&#x27;user&#x27;)-&gt;latest()-&gt;get(),]);]
+}</code></span></pre><ul id="83cfcc79-d28a-46c3-ac18-47870cd2fd88" class="bulleted-list"><li style="list-style-type:disc">where <strong><strong><strong><strong>latest </strong></strong></strong></strong>method provides our chirps in descending order. .ie the last chirp added appears first</li></ul><ol type="1" id="5afeab2b-3c85-437b-afc6-a0afa907df08" class="numbered-list" start="35"><li>Connecting users(the model) to chirps(model too)<br/>this is where relationships come in. to connect users to chirps, we edit the chirps model, and define a belongsTo relationship in a user() function. i.e <br/></li></ol><pre id="3014c931-42a6-4715-ba78-83324132696c" class="code"><span><code>&lt;?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+class Chirp extends Model
+{
+    use HasFactory;
+    protected $fillable=[
+        &#x27;message&#x27;,
+    ];
+    public function user(): BelongsTo
+    {
+        return $this-&gt;belongsTo(User::class);
+    }
+}</code></span></pre><ol type="1" id="f8c92e05-db0b-4890-b8e9-dbf748148aba" class="numbered-list" start="36"><li>Next we need to create a view or update our index.blade.php view to display the retrieved data</li></ol></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Editing Chirps</summary><div class="indented"><p id="55f2dfd8-b9f5-4df0-8438-e0177e926f17" class="">This will involve creating a view called edit.blade.php that is almost similar to create chirp. It will have a form that will process a “put”/”patch” method which updates the database.</p><p id="952d10c4-21ab-40d4-a097-f89bee04bd52" class="">First we update our routes to enable <strong>chirps.edit and chirps.update </strong>routes for our resource controller.</p><pre id="c62c3535-2fd8-43ff-8b44-0c17fa9729d9" class="code"><span><code>Route::resource(&#x27;chirps&#x27;, ChirpController::class)-&gt;only([&#x27;index&#x27;, &#x27;store&#x27;, &#x27;edit&#x27;,&#x27;update&#x27;])-&gt;middleware([&#x27;auth&#x27;, &#x27;verified&#x27;]);</code></span></pre><p id="21ab213e-4b05-44da-b9a4-60d2ea0faa2a" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Linking to the edit page:</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><p id="e0786319-8b47-46be-bf5f-efd67c0a0c83" class="">The edit page will only be visible to the creator/author of a chirp, we’ll use <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>x-dropdown </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>component that comes with Breeze. We’ll also display an indication if a Chirp has been edited by comparing the Chirp’s <strong>created_at </strong>date with its <strong>updated_at</strong> date.</p><ul id="36f4844c-43ce-4606-b5f4-3a82eecdccdf" class="bulleted-list"><li style="list-style-type:disc">Next we need to update our Chirpcontroller update and edit methods. the edit tmethod should return the edit.blade.php view which contains a form while the update method handles the updations from the form. here is the code:</li></ul><pre id="4f57713c-5e31-4ef1-96e2-0645d5db1871" class="code"><span><code>public function edit(Chirp $chirp)
+    {
+        // the authorize method will prevent everyone from editting the Chirp.
+        // we can specify who is allowed to modify the chirp by creating a Model policy
+        // with the following command: php artisan make:policy ChirpPolicy --model=Chirp
+        // This will create a policy class at app/Policies/ChirpPolicy.php which we can update to specify that only the author is authorized to update a Chirp:
+        $this-&gt;authorize(&#x27;update&#x27;, $chirp);
+ 
+        return view(&#x27;chirps.edit&#x27;, [
+            &#x27;chirp&#x27; =&gt; $chirp,
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Chirp $chirp)
+    {
+        //
+        $this-&gt;authorize(&#x27;update&#x27;, $chirp);
+ 
+        $validated = $request-&gt;validate([
+            &#x27;message&#x27; =&gt; &#x27;required|string|max:255&#x27;,
+        ]);
+ 
+        $chirp-&gt;update($validated);
+ 
+        return redirect(route(&#x27;chirps.index&#x27;));
+    }</code></span></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3df04296-f9bc-4338-99da-ab38ee582874"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">CHECJOUT FORM REQUEST VALIDATION</div></figure><ul id="150bcfe7-4090-4eb1-bc55-29cac69b5191" class="bulleted-list"><li style="list-style-type:disc">By default, the <strong>Authorize </strong>method we used on edit and update methods will prevent everyone from being able to update the chirp. we need to set a rule or policy to the model to allow only the user to modify the chirp.</li></ul><pre id="0563ca91-a627-4949-91ef-b00b8ca7b9d3" class="code"><span><code>$this-&gt;authorize(&#x27;update&#x27;, $chirp);</code></span></pre><ul id="1ec73a3f-b95f-4f2f-8a48-d0c5c236b173" class="bulleted-list"><li style="list-style-type:disc">To create a model Policy, run:</li></ul><pre id="4fceff45-98c6-45a3-becc-1fc5828ed8d2" class="code"><span><code>php artisan make:policy ChirpPolicy --model=Chirp</code></span></pre><ul id="433bc286-d5c3-43e7-ae1b-1f201534aa20" class="bulleted-list"><li style="list-style-type:disc">This creates a policy class at <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>app/policies/ChirpPolicy.php </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>which we can update to specify that only the author is authorized ro update a chirp.</li></ul><pre id="460f0d25-202a-456c-9e29-f654455d95e8" class="code"><span><code>public function update(User $user, Chirp $chirp): bool
+    {
+        //
+       
+        return $chirp-&gt;user()-&gt;is($user);
+    
+    }</code></span></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">Deleting a chirp</summary><div class="indented"><p id="59c2c409-7576-4fd7-bbe2-c29973a09279" class="">To delete a chirp:</p><p id="eb531c07-919c-47f9-8e99-c43c7bbba998" class="">only the author of a chirp can delete it.</p><p id="d36dd555-802c-47d2-b1c8-0c047fef9f51" class="">we will need to add a delete button, update the route for deletion and update the destroy method of our chirpsController</p><ul id="2b562967-0e21-4ef3-a2d3-eb9886c8f711" class="bulleted-list"><li style="list-style-type:disc">Updating the chirpController destry() method</li></ul><pre id="f0ff3612-9932-4fe9-9e2f-1d1d67c529bc" class="code"><span><code>public function destroy(Chirp $chirp)
+    {
+        //
+        $this-&gt;authorize(&#x27;delete&#x27;, $chirp);
+
+        $chirp-&gt;delete();
+        return redirect(route(&#x27;chirps.index&#x27;));
+    }
+</code></span></pre><ul id="977c121e-8b15-4651-acc0-c9f1c91af0d2" class="bulleted-list"><li style="list-style-type:disc">Since we are still using the authorize method which prevents everyone from deleting or modifying the chirp, we have to add to our ChirpPolicies file to allow the author of a chirp to delete it.</li></ul><p id="e419c755-1ae7-4fc9-b01a-65cb518580b9" class=""><div class="indented"><pre id="fe1267e7-95a2-4213-87db-e8247d8d0e97" class="code"><span><code>public function delete(User $user, Chirp $chirp): bool
+    {
+        // Rather than repeating the logic from the update method,
+				// we can define the same logic by calling the update method
+				// from our destroy method. Anyone that is authorized to update
+				// a Chirp will now be authorized to delete it as well.
+        return $this-&gt;update($user, $chirp);
+    }
+</code></span></pre><ul id="d0bd8150-c77c-4da9-a9a4-62c8e73a7ffa" class="bulleted-list"><li style="list-style-type:disc">Next we need to update our view to add the delete button if a user is the author of the chirp</li></ul></div></p><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Laravel Notifications and Events</summary><div class="indented"><p id="56a87025-6bce-432b-90b4-332802c083a9" class="">Laravel also provides an easy way to support notifications across a different variety of delivery channels, including Email, Sms and Slack. </p><p id="7e57a8e8-1f05-446d-94c8-85dae53b9bcf" class="">Notifications may also be stored in a database so that they may be displayed in your web interface.</p><ol type="1" id="cbdef0a5-ba2e-4dba-9f80-abf2f5e4d973" class="numbered-list" start="1"><li>Creating the notification:</li></ol><pre id="6b978f01-2d75-4ea0-a900-568c24ada9f7" class="code"><span><code>// create a notification at app/Notifications/NewChirp.php
+// that is ready for us to customize
+php artisan make:notification NewChirp</code></span></pre><p id="6d0d78cb-727a-4505-85f4-9718d00385fd" class="">Since our notification chirp is created, open the NewChirp class and allow it to accept the Chirp that was just created, and the customize the message to include the author’s name and a snippet from the message</p><pre id="cb754b75-a06e-4a3a-b2bc-11bda9b47509" class="code"><span><code>&lt;?php
+
+namespace App\Notifications;
+//include the model you want to use
+use App\Models\Chirp;
+use Illuminate\Bus\Queueable;
+use Illuminate\Support\Str;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
+
+class NewChirp extends Notification
+{
+    use Queueable;
+
+    /**
+     * Create a new notification instance.
+     */
+    public function __construct(public Chirp $chirp)
+    {
+        //Now you can access $this-&gt;chirp, which is an instance of Chirp
+    }
+
+    /**
+     * Get the notification&#x27;s delivery channels.
+     *
+     * @return array&lt;int, string&gt;
+     */
+    public function via(object $notifiable): array
+    {
+        return [&#x27;mail&#x27;];
+    }
+
+    /**
+     * Get the mail representation of the notification.
+     */
+    public function toMail(object $notifiable): MailMessage
+    {
+        return (new MailMessage)
+        -&gt;subject(&quot;New Chirp from {$this-&gt;chirp-&gt;user-&gt;name}&quot;)
+        -&gt;greeting(&quot;New Chirp from {$this-&gt;chirp-&gt;user-&gt;name}&quot;)
+        -&gt;line(Str::limit($this-&gt;chirp-&gt;message, 50))
+        -&gt;action(&#x27;Go to Chirper&#x27;, url(&#x27;/&#x27;))
+        -&gt;line(&#x27;Thank you for using our application!&#x27;);
+    }
+
+    /**
+     * Get the array representation of the notification.
+     *
+     * @return array&lt;string, mixed&gt;
+     */
+    public function toArray(object $notifiable): array
+    {
+        return [
+            //
+        ];
+    }
+}</code></span></pre></div></details><p id="3b7c473e-35be-4b24-bb2c-e91356d08c9a" class="">Once that is done, we have an option to send the notification when a user clicks on store chirp in our store method inside ChipController class, but this would mean more work for the controller and would potentially slow down the request. <br/>To avoid this, we can use an event listener that we can listen for and process in a background queue.<br/></p><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Creating an Event</summary><div class="indented"><p id="4e1493d4-ee01-4266-9548-ea55e46f5dcd" class="">Events a great way to decouple various aspects of your app, since a single event can have multiple listeners that do not depend on one another.<br/>we can create an event using the command:<br/></p><pre id="ce66b21f-7cfc-45a0-9bbb-1da106465625" class="code"><span><code>php artisan make:event ChirpCreated</code></span></pre><p id="5effc216-65f2-4f00-9d17-f457b1ddb22c" class="">This will create a new event class at <code>app/Events/ChirpCreated.php</code></p><p id="32d5fc91-35f8-4273-be8e-d18ce8d6bac4" class="">Since we will be dispatching events for each new Chirp that is created,lets update ChirpCreated event to accept the newly created Chirp so we may pass it on to our notification.</p><pre id="e9152188-a05a-4d6c-af6e-5e62d8d52b9c" class="code"><span><code>&lt;?php
+
+namespace App\Events;
+
+use App\Models\Chirp; //import the model to be used
+use Illuminate\Broadcasting\Channel;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PresenceChannel;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
+
+class ChirpCreated
+{
+    use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    /**
+     * Create a new event instance.
+     */
+     public function __construct(public Chirp $chirp)
+    {
+        //
+    }
+
+    /**
+     * Get the channels the event should broadcast on.
+     *
+     * @return array&lt;int, \Illuminate\Broadcasting\Channel&gt;
+     */
+    public function broadcastOn(): array
+    {
+        return [
+            new PrivateChannel(&#x27;channel-name&#x27;),
+        ];
+    }
+}</code></span></pre><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Dispatching the event</summary><div class="indented"><p id="be451388-05da-4078-8c85-e194ab5565f7" class="">Now that we have our event class, we are ready to dispatch it any time a newchirp is created. You may dispatch events anywhere in your application lifecycle, but as our events relates to the creation of an Eloquent model, we can configure our Chirp model to dispatch the event for us.<br/>my Chirp model now looks like this<br/></p><pre id="f235d0aa-a873-473d-87d8-923ace9d2bf5" class="code"><span><code>&lt;?php
+
+namespace App\Models;
+
+use App\Events\ChirpCreated; //import the event you want to use
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+class Chirp extends Model
+{
+    use HasFactory;
+		// the dispatch
+    protected $dispatchesEvents = [
+        &#x27;created&#x27; =&gt; ChirpCreated::class,
+    ];
+    protected $fillable=[
+        &#x27;message&#x27;,
+    ];
+    public function user(): BelongsTo
+    {
+        return $this-&gt;belongsTo(User::class);
+    }
+}</code></span></pre><p id="758ec40d-a578-4a24-9a67-8bd17a2c8ee3" class="">Now any time a new <code>Chirp</code> is created, the <code>ChirpCreated</code> event will be dispatched.</p><ul id="2f974f5f-f238-4041-a7f8-31c4a56f4f9f" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Creating an event listener</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></li></ul><ul id="7b4756e5-a4c8-4c3a-8486-a13c15d03943" class="bulleted-list"><li style="list-style-type:disc">Now that we&#x27;re dispatching an event, we&#x27;re ready to listen for that event and send our notification.</li></ul><ul id="ff8d4f52-99a9-4d47-9cd2-52711725c639" class="bulleted-list"><li style="list-style-type:disc">lets create an event listener that subscribes to our ChirpCreated event:</li></ul><pre id="dca60cdd-f220-4374-b925-b2024a1c82ec" class="code"><span><code>php artisan make:listener SendChirpCreatedNotifications --event=ChirpCreated</code></span></pre><p id="69964e91-d361-4866-8757-c7a3052ea777" class="">The new listener will be placed at <code>app/Listeners/SendChirpCreatedNotifications.php</code></p><p id="eb687fbf-2d34-4235-9e01-11adc82c54cc" class="">lets now update the listener to send our notifications: The sendChirpCreatedNotifications.php</p><pre id="9de6b896-7380-4467-8e1b-1eaddfe9211f" class="code"><span><code>&lt;?php
+
+namespace App\Listeners;
+
+use App\Events\ChirpCreated;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+use App\Models\User; //import model and the notification class you want to use
+use App\Notifications\NewChirp;
+
+class SendChirpCreatedNotifications implements ShouldQueue
+{
+    /**
+     * Create the event listener.
+     */
+    
+    public function __construct()
+    {
+        //
+    }
+
+    /**
+     * Handle the event.
+     */
+    public function handle(ChirpCreated $event): void
+    {
+        //
+        foreach (User::whereNot(&#x27;id&#x27;, $event-&gt;chirp-&gt;user_id)-&gt;cursor() as $user) {
+            $user-&gt;notify(new NewChirp($event-&gt;chirp));
+        }
+    }
+}
+</code></span></pre><p id="c5e9870d-5dc9-484d-aafe-976c16ee9121" class="">we used the shouldqueue interface, which tells laravel that the listener should be run in a queue. <br/>We&#x27;ve also configured our listener to send notifications to every user in the platform, except the author of the Chirp. In reality, this might annoy users, so you may want to implement a &quot;following&quot; feature so users only receive notifications for accounts they follow.<br/></p><ul id="5d6eefb7-513f-4208-8b74-b5854f579c4e" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong>Registering the event listener</strong></strong></strong></strong></strong></strong></strong></strong></li></ul><p id="119a109b-a67c-4281-a67a-95ebea10bddc" class="">Finally, we need to bind our listener to the event. This will tell laravel to invoke our event listener once the corresponding event is dispatched.</p><p id="fa97c114-bfb7-4a12-9810-6eabba3ed876" class="">We can do this within our <code>EventServiceProvider</code> class:</p><pre id="6625ee35-f39a-4ceb-823d-f218e108d19f" class="code"><span><code>&lt;?php
+
+namespace App\Providers;
+
+use App\Events\ChirpCreated;//import the corresponding event and the listener
+use App\Listeners\SendChirpCreatedNotifications;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Event;
+
+class EventServiceProvider extends ServiceProvider
+{
+    /**
+     * The event to listener mappings for the application.
+     *
+     * @var array&lt;class-string, array&lt;int, class-string&gt;&gt;
+     */
+    protected $listen = [
+        ChirpCreated::class =&gt; [
+            SendChirpCreatedNotifications::class,
+        ],
+        Registered::class =&gt; [
+            SendEmailVerificationNotification::class,
+        ],
+    ];
+
+    /**
+     * Register any events for your application.
+     */
+    public function boot(): void
+    {
+        //
+    }
+
+    /**
+     * Determine if events and listeners should be automatically discovered.
+     */
+    public function shouldDiscoverEvents(): bool
+    {
+        return false;
+    }
+}</code></span></pre><p id="d9577661-b374-4458-9d72-29c727380fe8" class="">
+</p><p id="d3891085-923b-42cf-ab71-02e8549748c2" class="">Testing it out.</p><p id="78d9bc27-de01-4f37-aa98-145e51aea0f4" class="">You may utilize local email testing tools like <a href="https://github.com/axllent/mailpit">Mailpit</a> and <a href="https://usehelo.com/">HELO</a> to catch any emails coming from your application so you may view them. If you are developing via Docker and Laravel Sail then Mailpit is included for you.</p><p id="7ca48444-9e7f-4fba-aeab-5f45d2ce2c40" class="">Alternatively, you may configure Laravel to write mail to a log file by editing the <code>.env</code> file in your project and changing the <code>MAIL_MAILER</code> environment variable to <code>log</code>. By default, emails will be written to a log file located at <code>storage/logs/laravel.log</code>.</p><p id="db302e2d-67fa-4cfa-bb2b-17b815f809b8" class="">We&#x27;ve configured our notification not to send to the Chirp author, so be sure to register at least two users accounts. Then, go ahead and post a new Chirp to trigger a notification.</p><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">Adding a follow functionality</summary><div class="indented"><p id="3eff0f18-bace-491c-8d21-2e389cfcea40" class="">A user should be able to follow others and only see content of the people they follow.</p><p id="0e2bb401-4e44-4e3f-b5de-52373b7debbf" class="">So i might have a followers model that will store list of all people a user follows. along the way, i will have to notify the user who has been followed that they have a new follower. I should create a user profile view and display content like how many followers they have and how many they are following,</p><p id="943c7ed4-8e48-47be-b120-622fecb4020f" class="">The user who is logged in, needs to see cards with details of other users who he/she can follow<br/><br/></p><p id="b4115b55-203c-48bb-b669-b495a2cf3c11" class="">when a user clicks on follow, we send a post request to our route, the route then calls the controller, the controller will add the followed user to the followers table of the logged in user</p><p id="66e8fb3c-bcde-4979-aea3-2b90ea561099" class="">How i went about it.</p><ol type="1" id="9467bfb0-784e-4a20-9798-b761a6e95b9d" class="numbered-list" start="1"><li>created a route for retrieving all users except the logged in user and displayed them inside the chirps.index. to achieve this, i update the chirpController index() method this way:</li></ol><pre id="3a8ce17f-beb8-4eac-8e63-d3356c85aaeb" class="code"><span><code>public function index()
+     {
+         $chirps = Chirp::with(&#x27;user&#x27;)-&gt;latest()-&gt;paginate(2); // You can change 10 to the number of items per page you want
+         $usersToFollow = User::where(&#x27;id&#x27;, &#x27;!=&#x27;, auth()-&gt;id())-&gt;get();
+
+         return view(&#x27;chirps.index&#x27;, compact(&#x27;chirps&#x27;,&#x27;usersToFollow&#x27;));
+     }</code></span></pre><pre id="a700db41-3b1d-4701-98d9-b23ba92d9610" class="code"><span><code>// web.php
+
+Route::post(&#x27;/follow/{user}&#x27;, [FollowController::class, &#x27;follow&#x27;])-&gt;name(&#x27;follow&#x27;);</code></span></pre><ol type="1" id="e83208a8-b7eb-4ca5-985c-46aed7acb436" class="numbered-list" start="1"><li> I also updated the chirps.index view to show these users, under a section, Users you can follow.</li></ol><pre id="529b0d95-c48a-4071-adc0-5879e4bdf1e2" class="code"><span><code>&lt;div class=&quot;max-w-sm mx-auto overflow-hidden rounded-md shadow-lg bg-white&quot;&gt;
+
+            &lt;div class=&quot;px-6 py-4&quot;&gt;
+                &lt;h2 class=&quot;text-xl font-bold mb-2&quot;&gt;Users you can Follow&lt;/h2&gt;
+                &lt;table&gt;
+                    @forelse ($usersToFollow as $user)
+                        &lt;tr class=&quot;flex items-center mb-2 mt-2&quot;&gt;
+                            &lt;td class=&quot; flex items-center&quot;&gt;
+                                &lt;img src=&quot;{{ $user-&gt;avatar_url ?: &#x27;https://source.unsplash.com/random/200x200?sig=1&#x27; }}&quot; alt=&quot;{{ $user-&gt;name }}&quot; class=&quot;w-8 h-8 rounded-full mr-2&quot;&gt;
+                                &lt;span class=&quot;text-gray-800&quot;&gt;{{ $user-&gt;name }}&lt;/span&gt;
+                            &lt;/td&gt;
+                            &lt;td class=&quot; ml-auto&quot;&gt;
+                                &lt;form method=&quot;POST&quot; action=&quot;{{ route(&#x27;follow&#x27;, $user) }}&quot; class=&quot;&quot;&gt;
+                                    @csrf
+                                    &lt;button type=&quot;submit&quot; class=&quot;bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded&quot;&gt;
+                                        Follow
+                                    &lt;/button&gt;
+                                &lt;/form&gt;
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                    @empty
+                        &lt;p&gt;No users available to follow.&lt;/p&gt;
+                    @endforelse
+                &lt;/table&gt;
+                
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;div class=&quot;w-3/4 p-4 sm:p-6 lg:p-8&quot;&gt;
+        &lt;form method=&quot;POST&quot; action=&quot;{{ route(&#x27;chirps.store&#x27;) }}&quot;&gt;
+            @csrf
+            &lt;textarea
+                name=&quot;message&quot;
+                placeholder=&quot;{{ __(&#x27;What\&#x27;s on your mind?&#x27;) }}&quot;
+                class=&quot;block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm&quot;
+            &gt;{{ old(&#x27;message&#x27;) }}&lt;/textarea&gt;
+            &lt;x-input-error :messages=&quot;$errors-&gt;get(&#x27;message&#x27;)&quot; class=&quot;mt-2&quot; /&gt;
+            &lt;x-primary-button class=&quot;mt-4&quot;&gt;{{ __(&#x27;Chirp&#x27;) }}&lt;/x-primary-button&gt;
+        &lt;/form&gt;
+        
+        &lt;div class=&quot;mt-6 bg-white shadow-sm rounded-lg divide-y&quot;&gt;
+            @foreach ($chirps as $chirp)
+                &lt;div class=&quot;p-6 flex space-x-2&quot;&gt;
+                    &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; class=&quot;h-6 w-6 text-gray-600 -scale-x-100&quot; fill=&quot;none&quot; viewBox=&quot;0 0 24 24&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;&gt;
+                        &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; d=&quot;M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z&quot; /&gt;
+                    &lt;/svg&gt;
+                    &lt;div class=&quot;flex-1&quot;&gt;
+                       
+                        &lt;div class=&quot;flex justify-between items-center&quot;&gt;
+                            &lt;div&gt;
+                                &lt;span class=&quot;text-gray-800&quot;&gt;{{ $chirp-&gt;user-&gt;name }}&lt;/span&gt;
+                                &lt;small class=&quot;ml-2 text-sm text-gray-600&quot;&gt;{{ $chirp-&gt;created_at-&gt;format(&#x27;j M Y, g:i a&#x27;) }}&lt;/small&gt;
+                                @unless ($chirp-&gt;created_at-&gt;eq($chirp-&gt;updated_at))
+                                    &lt;small class=&quot;text-sm text-gray-600&quot;&gt; &amp;middot; {{ __(&#x27;edited&#x27;) }}&lt;/small&gt;
+                                @endunless
+                            &lt;/div&gt;
+                            @if ($chirp-&gt;user-&gt;is(auth()-&gt;user()))
+                                &lt;x-dropdown&gt;
+                                    &lt;x-slot name=&quot;trigger&quot;&gt;
+                                        &lt;button&gt;
+                                            &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; class=&quot;h-4 w-4 text-gray-400&quot; viewBox=&quot;0 0 20 20&quot; fill=&quot;currentColor&quot;&gt;
+                                                &lt;path d=&quot;M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z&quot; /&gt;
+                                            &lt;/svg&gt;
+                                        &lt;/button&gt;
+                                    &lt;/x-slot&gt;
+                                    &lt;x-slot name=&quot;content&quot;&gt;
+                                        &lt;x-dropdown-link :href=&quot;route(&#x27;chirps.edit&#x27;, $chirp)&quot;&gt;
+                                            {{ __(&#x27;Edit&#x27;) }}
+                                        &lt;/x-dropdown-link&gt;
+                                        &lt;form method=&quot;POST&quot; action=&quot;{{ route(&#x27;chirps.destroy&#x27;, $chirp) }}&quot;&gt;
+                                            @csrf
+                                            @method(&#x27;delete&#x27;)
+                                            &lt;x-dropdown-link :href=&quot;route(&#x27;chirps.destroy&#x27;, $chirp)&quot; onclick=&quot;event.preventDefault(); this.closest(&#x27;form&#x27;).submit();&quot;&gt;
+                                                {{ __(&#x27;Delete&#x27;) }}
+                                            &lt;/x-dropdown-link&gt;
+                                        &lt;/form&gt;
+                                    &lt;/x-slot&gt;
+                                &lt;/x-dropdown&gt;
+                            @endif
+                        &lt;/div&gt;
+                        &lt;p class=&quot;mt-4 text-lg text-gray-900&quot;&gt;{{ $chirp-&gt;message }}&lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            @endforeach
+            {{ $chirps-&gt;links() }}
+        &lt;/div&gt;
+    &lt;/div&gt;</code></span></pre><ol type="1" id="42c21aad-dfd2-4f6d-8475-4833511348f9" class="numbered-list" start="1"><li>Next, i had to create a followController to manage the followers goes along with a create_table_followers migration for creating the table followers.</li></ol><ol type="1" id="791e28f1-dd92-47d4-8f6b-8ee2e3ecc5b9" class="numbered-list" start="2"><li>What the FollowController does: The <code><strong>follow</strong></code> method is triggered when a user wants to follow another user, and it updates the relationships between the users accordingly.</li></ol><pre id="7ee28a56-9dc5-439f-974f-031384883d1b" class="code"><span><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+use App\Models\User;
+
+class FollowController extends Controller
+{
+    public function follow(User $user)
+    {
+        auth()-&gt;user()-&gt;follow($user);
+        
+        return redirect()-&gt;route(&#x27;chirps.index&#x27;)-&gt;with(&#x27;success&#x27;,&#x27;You are now following &#x27; . $user-&gt;name);
+        
+    }
+}</code></span></pre><ol type="1" id="6ee2fd8a-47ff-4097-95db-bf8da3168c55" class="numbered-list" start="1"><li>The method follow() is defined inside the User model</li></ol><pre id="724c949c-3b18-498e-be2b-722c17fd3173" class="code"><span><code>public function follow(User $user)
+{
+    $this-&gt;follows()-&gt;attach($user);
+
+    return $this;
+}</code></span></pre><ol type="1" id="04850caf-f82e-4109-a30f-f57fce4eeff4" class="numbered-list" start="1"><li>What the follow method inside user model does is, it executes the follows() method and it is used to make one user follow another. The exact details of the relationship should be defined in the follows method: $this-&gt;follows()-&gt;attach($user);</li></ol><ol type="1" id="4ab443b6-71e9-491f-a685-e6a41188adca" class="numbered-list" start="2"><li>The follows() method</li></ol><pre id="66964e0c-7fc8-4ea7-a992-a4e84d621fde" class="code"><span><code>public function follows()
+{
+    return $this-&gt;belongsToMany(User::class, &#x27;followers&#x27;, &#x27;follower_id&#x27;, &#x27;followed_user_id&#x27;);
+}
+//this method fines a many to many relationship, where users can 
+// follow other users. The relationship is defined using an
+// intermediate table named followers, and it involves two 
+//foreign keys: follower_id and followed_user_id.
+// The belongsToMany method is a part of Laravel&#x27;s Eloquent ORM
+// and simplifies the handling of many-to-many relationships in
+// the application.</code></span></pre><ol type="1" id="4a503f0d-27cd-4782-a608-c270446e7231" class="numbered-list" start="1"><li>FollowerController and a create_table_followers migration file.</li></ol><ol type="1" id="1466f9ff-8ed8-4b7d-905e-e39b9d1efa6a" class="numbered-list" start="2"><li>the FollowerController: calls the follow method and on successful follow, it redirects the user and returns a success message. </li></ol><ol type="1" id="c2ea6b91-d93a-4475-981a-39dcb12f5d5d" class="numbered-list" start="3"><li></li></ol><ol type="1" id="5ed1157c-5207-4a83-9992-622802040942" class="numbered-list" start="4"><li><br/><br/></li></ol><pre id="ee261cb5-3f59-4dfa-a338-6d61c1c7092a" class="code"><span><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+use App\Models\User;
+
+class FollowController extends Controller
+{
+    public function follow(User $user)
+    {
+        auth()-&gt;user()-&gt;follow($user);
+        
+        return redirect()-&gt;route(&#x27;chirps.index&#x27;)-&gt;with(&#x27;success&#x27;,&#x27;You are now following &#x27; . $user-&gt;name);
+        
+    }
+}</code></span></pre><ol type="1" id="bb59647f-9f7b-4a74-82db-a00fb94b8d31" class="numbered-list" start="1"><li>to see the returned message, go to the view that you redirected user to and add</li></ol><pre id="2e9b9c90-4f82-45e1-9ef7-d1d49240ed13" class="code"><span><code>@if(session(&#x27;success&#x27;))
+    &lt;div class=&quot;alert alert-success&quot;&gt;
+        {{ session(&#x27;success&#x27;) }}
+    &lt;/div&gt;
+@endif</code></span></pre><p id="a88f6cfd-3cc7-47f9-a18d-616c4c934ce4" class="">
+</p></div></details></div></details></div></details></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">Adding comments to chirps</summary><div class="indented"><ol type="1" id="701b59c3-39b1-41c8-a057-bcb50ce4561d" class="numbered-list" start="1"><li>to achieve this, we need to define the relationship between a comment and a chirp. a comment belongs to a chirp. a chirp has many comments. </li></ol><ol type="1" id="5bf79b48-d9a8-408a-9e98-9ac4e64de792" class="numbered-list" start="2"><li>we also need to store comments so we need the comments db table. will have a chirp_id as foreighnkey, and the user who comments</li></ol><p id="97c88bd6-ff53-4e2a-9ca6-9575022bc2bf" class="">
+</p></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">Liking a chirp</summary><div class="indented"><ol type="1" id="06a5177e-f983-4fd1-afad-d7366eed21f0" class="numbered-list" start="1"><li>I think onclick, i will chnage the like button color to show that you already liked the post, next i need to store the no. of like in order to display the total like count</li></ol><ol type="1" id="9b387b3b-6102-4a04-8549-25cdd60aa58c" class="numbered-list" start="2"><li></li></ol><p id="1d5b9281-fa54-4a81-aedb-37d95a0f1e68" class="">
+</p></div></details></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

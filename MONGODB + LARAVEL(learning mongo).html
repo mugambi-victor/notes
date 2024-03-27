@@ -1,0 +1,682 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>MONGODB + LARAVEL</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="8ff41f00-0406-471d-a1f5-3a79818ad649" class="page sans"><header><h1 class="page-title">MONGODB + LARAVEL</h1><p class="page-description"></p></header><div class="page-body"><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">What is MONGODB</summary><div class="indented"><p id="a0ee1e91-412d-4979-ae5c-8f9df96abfc9" class="">mongodb is a no-sql database program.</p><p id="896576db-8d0a-4cf7-bc7d-654c96edf0a9" class="">It uses <strong>document-oriented</strong> data model , which means data is stored in <strong>Json-like documents</strong>.</p><p id="f19cb79e-4424-4d32-b104-154fe9b7afea" class="">These documets are flexible in structure, allowing fields to vary from document to document within a collection.</p><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Key features of mongo db</summary><div class="indented"><ol type="1" id="1687e4cb-196b-4938-9d64-2d00cc682206" class="numbered-list" start="1"><li><strong>document-oriented: </strong>MongoDb stores data in JSON-like documents.</li></ol><ol type="1" id="7cfc4f0e-45c4-4e6d-b376-f9e08be84f8a" class="numbered-list" start="2"><li><strong>schemaless: </strong>unlike traditional databases, MongoDb does not require a predefined schema. This flexibility helps in environments where data structure may evolve overtime.</li></ol><ol type="1" id="d844469f-052a-4f38-b72b-c6b396c2c49f" class="numbered-list" start="3"><li><strong>High perfomance: </strong>MongoDb’s architecture and indexing capabilities provide fast read and write operations, making it suitable for applications with high throughput requirements. </li></ol><ol type="1" id="1f423b96-71bd-4456-ade1-69c7146574e8" class="numbered-list" start="4"><li><strong>scalability: </strong>MongoDB is designed to scale out horizontally, allowing for high performance across large datasets and high traffic volumes.</li></ol><ol type="1" id="4d9ec629-4102-4fde-b0f0-2a7c555cec3f" class="numbered-list" start="5"><li><strong>Rich Query Language: </strong>MongoDB supports a powerful query language for various operations like filtering, sorting and aggregation.</li></ol></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Introduction to MONGODB from MONGODB University</summary><div class="indented"><p id="4c52b9c0-94e2-4b85-91ff-48e99e8fed90" class=""><strong>course overview<br/>1. connecting to your database<br/></strong></p><ol type="1" id="861c150c-25cf-4221-895e-fba971a70719" class="numbered-list" start="2"><li>performing CRUD operations.</li></ol><ol type="1" id="b69afe5e-d560-4278-8478-585f13a229c5" class="numbered-list" start="3"><li>Create search experience for db users</li></ol><ol type="1" id="b955bbf6-63a3-4353-a57a-d7202cb66974" class="numbered-list" start="4"><li>Aggregation</li></ol><ol type="1" id="bb324989-549b-4c61-a88d-a80c8d41fa69" class="numbered-list" start="5"><li>Indexing</li></ol><ol type="1" id="c55dc3f5-5cc3-4293-a3f1-7b2c155e2ee7" class="numbered-list" start="6"><li>Data modelling</li></ol><ol type="1" id="d3312fa6-fa95-42f3-a71d-28c505e93ef0" class="numbered-list" start="7"><li>transactions</li></ol><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Coursework</summary><div class="indented"><h3 id="b74a6a8b-b3ae-42df-ac54-6b94df733f1c" class=""><strong>Unit 01: Getting Started with MongoDB Atlas, the Developer Data Platform.</strong></h3><ol type="1" id="c730158a-6ed3-42ab-b8e7-b1cd4a59f4b1" class="numbered-list" start="1"><li>Atlas is a comprehensive data platform. It allows users to deploy, manage and scale mongoDb databases with ease in the cloud environment.</li></ol><ol type="1" id="ab71879f-d66d-4913-bf82-ca7805acf8bc" class="numbered-list" start="2"><li>Atlas enables database replication to enhance redundancy and availability incase of server failure.</li></ol><ol type="1" id="d2bf46c1-dbe8-461d-8fb1-d9edb3a3f165" class="numbered-list" start="3"><li>Data on Atlas can be managed using the <strong>Atlas CLI or Administration API</strong></li></ol><ol type="1" id="236ef9e6-96ff-414a-b8f6-2375c4970799" class="numbered-list" start="4"><li><strong>Atlas search: </strong>enables you to build rich search experience on top of your data on the cloud.</li></ol><ol type="1" id="9c9281ca-08ec-42c3-880f-bbef68cb13a6" class="numbered-list" start="5"><li><strong>Atlas devicing: </strong>Allows you to keep data in sync on cloud and  mobile devices  or other edge devices.</li></ol><ol type="1" id="258773ec-bb2d-41c8-af07-ef6f29551f18" class="numbered-list" start="6"><li><strong>Atlas data lake: </strong>lets you automatically extract data from your atlas databases to your iwn low cost, fully managed data lake environment. Data lake uses a format that’s optimized for analytical queries.</li></ol><ol type="1" id="f67ca13b-0673-4891-b7bc-e174ca5240f0" class="numbered-list" start="7"><li><strong>Atlas data federation: </strong>It enables you to smoothly query, transform, aggregate, and write data from Atlas databases, Atlas Data Lakes, or your own cloud object storage environments.</li></ol><ol type="1" id="0dfee0e8-8231-438f-85a5-1b0e7223a2b1" class="numbered-list" start="8"><li><strong>Atlas Chart:</strong> This is an integrated data visualization tool. It enables you to effortlessly create, share, and embed detailed dashboards from your data stored in the cloud.</li></ol><ol type="1" id="c592647f-d062-419e-b165-be66a7a5f6f6" class="numbered-list" start="9"><li><strong>Atlas App services: </strong>offers a set of capabilities that allow you to build faster. It includes a data API, which enables you to read and write data in ATLAS with standard HTTP requests. It also includes a GraphQL API, functions and triggers to enable you to easily create applications with event driven architectures.</li></ol><h3 id="5e38c5a3-89c6-4eee-9cb4-5ae3823558f2" class="">Quizz</h3><p id="ef37f71d-44e1-47b1-bfee-b515260feae9" class=""><strong>MongoDB atlas:</strong></p><ol type="a" id="0cdb4d4f-655d-44ac-a0eb-5dba8286ae87" class="numbered-list" start="1"><li>lets you store data with MongoDB&#x27;s multi-cloud, global service.</li></ol><ol type="a" id="767eaca2-3acc-4ecf-9ae9-2663989c426c" class="numbered-list" start="2"><li> Add search functionality to your application, like a search bar.</li></ol><ol type="a" id="5effc820-62e3-473f-872e-2d63d0eb1040" class="numbered-list" start="3"><li>Write and host a full application in a managed cloud environment.</li></ol><ol type="a" id="06de1990-2eb5-4bf6-af7f-05a04a42b041" class="numbered-list" start="4"><li>Query across multiple Atlas clusters to get a holistic view of your data.</li></ol><p id="8ad4c2dc-a8fe-4771-a255-6707ee625c3c" class=""><strong>MongoDB Atlas Cluster</strong></p><ol type="a" id="a25a81c8-ac7a-4c5b-82e3-eac12f3606b5" class="numbered-list" start="1"><li>A MongoDB Atlas Cluster is a group of servers that are connected via a network that hold copies of your data.</li></ol><ol type="a" id="656cc1b3-dc21-4c93-a8d3-f9e34873c109" class="numbered-list" start="2"><li>MongoDB Atlas Clusters can be deployed globally in a single geographical region or across multiple geographical regions, depending on the cluster tier.</li></ol><ol type="a" id="c62e2d22-55e8-47a1-8912-1588aa2e80d0" class="numbered-list" start="3"><li>Dedicated clusters provide access to all Atlas features.</li></ol><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><strong>creating and Deploying an Atlas cluster</strong></summary><div class="indented"><ol type="1" id="67d9d73b-a221-4331-9541-adebad3970bb" class="numbered-list" start="1"><li>set up an atlas account</li></ol><ol type="1" id="b02957a0-72dd-40dd-b3d1-289d13d2eea7" class="numbered-list" start="2"><li><strong>Organizations:</strong> Organizations help us to Group, and define users and teams and grant them access to projects.</li></ol><ol type="1" id="69194a88-646e-4f5d-877c-5e3de678dc5c" class="numbered-list" start="3"><li><strong>Projects: </strong>Allow you to define and organize resources like db clusters. </li></ol><ol type="1" id="0f3a40a6-71d5-443b-b4c8-09fa6b6559f5" class="numbered-list" start="4"><li>To create a new db and cluster,<ol type="a" id="b8d1d2a5-5254-453b-bd02-17df3c9694b4" class="numbered-list" start="1"><li>visit your mongo atlas acc and click on <strong>build database&gt; Access advanced configuration </strong>at the bottom of the page.<strong>&gt;select free tier shared cluster. Under cluster tier ensure its and m-0 sandbox <br/>then create cluster<br/>- You will be redirected to a page where you are expected to configure admin and IP address that can access it.<br/></strong></li></ol><ol type="a" id="aa981d3b-52b9-4bed-a838-f0d28de143d4" class="numbered-list" start="2"><li>After doing these settings, <strong>finish and close. Go to load sample dataset</strong></li></ol></li></ol><h3 id="0223b8a1-90cd-4dca-8dbf-5f15991655df" class="">Unit 02: Overview of MongoDB and the Document Model</h3><ol type="1" id="301264e6-b759-4c43-a0e5-04f0e0011443" class="numbered-list" start="1"><li>MongoDB is a general purpose <strong>Document </strong>database.</li></ol><ol type="1" id="fb1572c9-1551-4ee4-9179-44b7543cef65" class="numbered-list" start="2"><li>It structures data into <strong>documents </strong>which are similar to json objects. Documents are more friendly to work with compared to relational databases</li></ol><ol type="1" id="fe10aeff-e236-4e20-872f-af8848daa612" class="numbered-list" start="3"><li>Document correspond to objects in code.</li></ol><ol type="1" id="12aa2d3a-699d-48f6-9587-ad92c944a8ea" class="numbered-list" start="4"><li>Documents can store different structures of data including:<ol type="a" id="b3ea0d1e-42fc-4250-8509-b4fcbde00068" class="numbered-list" start="1"><li>key-value pairs</li></ol><ol type="a" id="697be5a9-4d30-4f75-9cc6-a286e1041333" class="numbered-list" start="2"><li>text</li></ol><ol type="a" id="4945b20b-2546-4b4b-9854-f02b3dd6ab22" class="numbered-list" start="3"><li>Geospatial</li></ol><ol type="a" id="3be37269-1938-48f6-9c46-323c4bb45630" class="numbered-list" start="4"><li>Time-series</li></ol><ol type="a" id="373149ff-ef4a-4efe-9cdf-bf5b36e408a2" class="numbered-list" start="5"><li>Graph data</li></ol></li></ol><ol type="1" id="7b76effd-3b62-46a9-a773-9f3ab009b65b" class="numbered-list" start="5"><li>MongoDB has drivers for all programming languages making it efficient to work with. </li></ol><ol type="1" id="03183d8b-5a6f-4d56-9b46-d899d2295d32" class="numbered-list" start="6"><li>key features of mongoDb incude:<ol type="a" id="a48f7711-1e7d-4235-a69a-e961a4acdf74" class="numbered-list" start="1"><li>Scalability</li></ol><ol type="a" id="8ac27567-e7ce-4134-82d9-5590a3cef7ed" class="numbered-list" start="2"><li>Resilience</li></ol><ol type="a" id="c23fbf5f-b510-4892-a3cc-54e9e1a3fe27" class="numbered-list" start="3"><li>Speed of Develpment</li></ol><ol type="a" id="f0fb8fda-9df7-48ca-9b64-c78531346231" class="numbered-list" start="4"><li>privacy and security</li></ol></li></ol><ol type="1" id="c5ccf065-03a4-406c-b8f9-1068a98c1a7a" class="numbered-list" start="7"><li>Important terms when working with mongoDB<ol type="a" id="2bcd8c12-6f92-4525-aed8-5687db525ac2" class="numbered-list" start="1"><li><strong>document: </strong>The basic unit of data in mongodb</li></ol><ol type="a" id="ef660c0e-1053-4227-99d2-202f93aaa6e1" class="numbered-list" start="2"><li><strong>collection: </strong>A group of documents</li></ol><ol type="a" id="37d05f34-4f55-4de2-a1a2-ee24cdb73ab6" class="numbered-list" start="3"><li><strong>Database: </strong>A container for collections</li></ol></li></ol><ol type="1" id="dce441a5-a711-403c-a420-8e69aa1b332f" class="numbered-list" start="8"><li><strong>Whats the relation between mongoDB and Atlas? </strong>MongoDB is at the core of Atlas which is our developer data platform.</li></ol><h3 id="c27010e4-72f1-48c3-8cb3-3f830d4e8c1f" class="">Unit 03: Connecting to a MongoDB Database</h3><ol type="1" id="5e241510-1d7e-4287-b362-1904efb1ac6d" class="numbered-list" start="1"><li>mongo db stores data in structures called documents which are similar to json objects. example:</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="076e3587-8c78-4ee3-b70c-b739f81c13b4" class="code"><code class="language-JSON">{
+&quot;_id&quot;: 1,
+&quot;name&quot;: &quot;AC3 Phone&quot;,
+&quot;colors&quot; : [&quot;black&quot;, &quot;silver&quot;],
+&quot;price&quot; : 200,
+&quot;available&quot; : true
+}</code></pre><ol type="1" id="9e19898f-ea3b-4bd9-92ce-8cbad12bca86" class="numbered-list" start="2"><li>While mongo db data are displayed in <strong>json format </strong>they are stored in the database using a format called <strong>BSON(Binary json).<br/>BSON<br/></strong> is an extension of JSON providing additional features that MongoDB can leverage. Also supports additional datatypes not available in JSON.</li></ol><ol type="1" id="417531a6-c139-4b59-bc07-ba3346abec0b" class="numbered-list" start="3"><li>Every document requires an <strong>_id field, </strong>which acts as a <strong>primary key. </strong>If _id field is not specified, mongodb automatically generates an <strong>ObjectId </strong>for the _id field.</li></ol><ol type="1" id="a0d6b98d-303a-4a9a-a9dd-7aa04a97222e" class="numbered-list" start="4"><li>Mongodb has flexible schema. eg if you had 3 fields in your document and during develpoment you remember you have to include a forth one, you just need to update the classes to accomodate this new field without explicitly having to add the column name like in relational dbs.</li></ol><ul id="c4da7795-ccec-4aec-9434-e55f5c200997" class="bulleted-list"><li style="list-style-type:disc">Unit 04: MongoDB CRUD Operations: Insert and Find Documents</li></ul><ul id="838dc545-d60c-4538-a5a2-6bdb841f21fa" class="bulleted-list"><li style="list-style-type:disc">Unit 05: MongoDB CRUD: Replace and Delete</li></ul><ul id="94dec2a3-0121-473b-9b40-370cd370d470" class="bulleted-list"><li style="list-style-type:disc">Unit 06: MongoDB CRUD Operations: Modifying Query Results</li></ul><ul id="a55ad522-9ee5-4d9c-8dd7-60439111db9d" class="bulleted-list"><li style="list-style-type:disc">Unit 07: MongoDB Aggregation</li></ul><ul id="b0783be1-9148-4218-91de-f8e3d61ea00f" class="bulleted-list"><li style="list-style-type:disc">Unit 08: MongoDB Indexing</li></ul><ul id="2603c46c-7c2e-4572-91f6-0ecfdf8e3b04" class="bulleted-list"><li style="list-style-type:disc">Unit 09: MongoDB Atlas Search</li></ul><ul id="c61ea999-2538-4cdc-91f1-aa10dc6fbe5d" class="bulleted-list"><li style="list-style-type:disc">Unit 10: Introduction to MongoDB Data Modeling</li></ul><ul id="9f4cb45b-d441-405a-a6f0-8e06dfc0a27e" class="bulleted-list"><li style="list-style-type:disc">Unit 11: MongoDB Transactions</li></ul><figure id="d2ab414b-0af3-4e06-ac62-86030c4fa79c" class="link-to-page"><a href="https://www.notion.so/LARAVEL-MONGODB-PRODUCTS-MANAGEMENT-APP-d2ab414b0af34e06ac6286030c4fa79c?pvs=21">LARAVEL + MONGODB PRODUCTS MANAGEMENT APP</a></figure></div></details></div></details></div></details></div></details></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
